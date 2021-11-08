@@ -1,1 +1,1 @@
-# Temperature-Monitering-System
+# Temperature-Monitoring-System
