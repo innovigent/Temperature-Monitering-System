@@ -1,18 +1,18 @@
 import { Helmet } from 'react-helmet';
 import { Box, Container, Grid } from '@material-ui/core';
-import Budget from '../components/dashboard/Budget';
-import LatestOrders from '../components/dashboard/LatestOrders';
-import LatestProducts from '../components/dashboard/LatestProducts';
-import Sales from '../components/dashboard/Sales';
-import TasksProgress from '../components/dashboard/TasksProgress';
-import TotalCustomers from '../components/dashboard/TotalCustomers';
-import TotalProfit from '../components/dashboard/TotalProfit';
-import TrafficByDevice from '../components/dashboard/TrafficByDevice';
+import { red } from '@material-ui/core/colors';
+import TotalEmployees from '../components/dashboard/TotalEmployees';
+import TappedEmployees from '../components/dashboard/TappedEmployees';
+import TempStats from '../components/dashboard/TempStats';
+import AbsentEmployees from '../components/dashboard/AbsentEmployees';
+import EnteredEmployees from '../components/dashboard/EnteredEmployees';
+import HighTempEmployees from '../components/dashboard/HighTempEmployees';
+import TempStatsToday from '../components/dashboard/TempStatsToday';
 
 const Dashboard = () => (
   <>
     <Helmet>
-      <title>Dashboard | Material Kit</title>
+      <title>Dashboard</title>
     </Helmet>
     <Box
       sx={{
@@ -24,28 +24,30 @@ const Dashboard = () => (
       <Container maxWidth={false}>
         <Grid container spacing={3}>
           <Grid item lg={3} sm={6} xl={3} xs={12}>
-            <Budget />
+            <TotalEmployees />
           </Grid>
           <Grid item lg={3} sm={6} xl={3} xs={12}>
-            <TotalCustomers />
+            <EnteredEmployees />
           </Grid>
           <Grid item lg={3} sm={6} xl={3} xs={12}>
-            <TasksProgress />
+            <AbsentEmployees />
           </Grid>
           <Grid item lg={3} sm={6} xl={3} xs={12}>
-            <TotalProfit sx={{ height: '100%' }} />
+            <HighTempEmployees
+              sx={{
+                height: '100%',
+                backgroundColor: red[400]
+              }}
+            />
           </Grid>
           <Grid item lg={8} md={12} xl={9} xs={12}>
-            <Sales />
+            <TempStats />
           </Grid>
           <Grid item lg={4} md={6} xl={3} xs={12}>
-            <TrafficByDevice sx={{ height: '100%' }} />
+            <TempStatsToday sx={{ height: '100%' }} />
           </Grid>
-          <Grid item lg={4} md={6} xl={3} xs={12}>
-            <LatestProducts sx={{ height: '100%' }} />
-          </Grid>
-          <Grid item lg={8} md={12} xl={9} xs={12}>
-            <LatestOrders />
+          <Grid item lg={12} md={12} xl={12} xs={12}>
+            <TappedEmployees />
           </Grid>
         </Grid>
       </Container>
