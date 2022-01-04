@@ -9,7 +9,7 @@ import AccountProfileDetails from '../components/account/AccountProfileDetails';
 const CustomerList = () => (
   <>
     <Helmet>
-      <title>Customers | Material Kit</title>
+      <title>Employees</title>
     </Helmet>
     <Box
       sx={{
@@ -18,10 +18,9 @@ const CustomerList = () => (
         py: 3
       }}
     >
-      
       <Container maxWidth={false}>
-         <AccountProfileDetails />
-        <CustomerListToolbar />
+        <AccountProfileDetails />
+        {/* <CustomerListToolbar /> */}
         <Box sx={{ pt: 3 }}>
           <CustomerListResults customers={customers} />
         </Box>

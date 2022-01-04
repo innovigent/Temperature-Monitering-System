@@ -1,16 +1,12 @@
 import { Helmet } from 'react-helmet';
-import {
-  Box,
-  Container,
-  Grid
-} from '@material-ui/core';
+import { Box, Container, Grid } from '@material-ui/core';
 import AccountProfile from '../components/account/AccountProfile';
 import AccountProfileDetails from '../components/account/AccountProfileDetails';
 
-             const Account = () => (
+const Account = () => (
   <>
-         <Helmet>
-      <title>Add Employee | Material Kit</title>
+    <Helmet>
+      <title>Add Employee</title>
     </Helmet>
     <Box
       sx={{
@@ -19,27 +15,12 @@ import AccountProfileDetails from '../components/account/AccountProfileDetails';
         py: 3
       }}
     >
-      <Container maxWidth="lg">
-        <Grid
-          container
-          spacing={3}
-        >
-          <Grid
-            item
-            lg={4}
-            md={6}
-            xs={12}
-          >
+      <Container maxWidth="xxl">
+        <Grid container spacing={3}>
+          <Grid item lg={4} md={6} xs={12}>
             <AccountProfile />
-                         <br />
-                          <br/>
           </Grid>
-          <Grid
-            item
-            lg={8}
-            md={6}
-            xs={12}
-          >
+          <Grid item lg={8} md={6} xs={12}>
             <AccountProfileDetails />
           </Grid>
         </Grid>

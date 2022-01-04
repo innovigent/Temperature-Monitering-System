@@ -22,7 +22,7 @@ const routes = [
     element: <DashboardLayout />,
     children: [
       { path: 'account', element: <Account /> },
-      { path: 'customers', element: <CustomerList /> },
+      { path: 'employees', element: <CustomerList /> },
       { path: 'dashboard', element: <Dashboard /> },
       { path: 'products', element: <ProductList /> },
       { path: 'Adduserfil', element: <Adduserfil /> },
@@ -38,7 +38,7 @@ const routes = [
     path: '/',
     element: <MainLayout />,
     children: [
-      // { path: 'login', element: <Login /> },
+      { path: 'login', element: <Login /> },
       { path: 'forgot', element: <Forgetpassword /> },
       { path: 'register', element: <Register /> },
       { path: '404', element: <NotFound /> },

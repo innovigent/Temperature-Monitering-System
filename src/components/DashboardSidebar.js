@@ -1,26 +1,20 @@
 import { useEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
+import SettingsInputComponentOutlinedIcon from '@mui/icons-material/SettingsInputComponentOutlined';
+import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
+import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import {
   Avatar,
   Box,
-  Button,
   Divider,
   Drawer,
   Hidden,
   List,
   Typography
 } from '@material-ui/core';
-import {
-  AlertCircle as AlertCircleIcon,
-  BarChart as BarChartIcon,
-  Lock as LockIcon,
-  Settings as SettingsIcon,
-  ShoppingBag as ShoppingBagIcon,
-  User as UserIcon,
-  UserPlus as UserPlusIcon,
-  Users as UsersIcon
-} from 'react-feather';
 import NavItem from './NavItem';
 
 const user = {
@@ -32,49 +26,29 @@ const user = {
 const items = [
   {
     href: '/app/dashboard',
-    icon: BarChartIcon,
+    icon: GridViewOutlinedIcon,
     title: 'Dashboard'
   },
-  // {
-  //   href: '/app/customers',
-  //   icon: UsersIcon,
-  //   title: ' Employees'
-  // },
-  // {
-  //   href: '/app/products',
-  //   icon: ShoppingBagIcon,
-  //   title: 'Products'
-  // },
   {
-    href: '/app/account',
-    icon: UserIcon,
+    href: '/app/employees',
+    icon: GroupOutlinedIcon,
     title: 'Add Employees'
   },
-   {
+  {
     href: '/app/Location',
-    icon: UserIcon,
+    icon: FmdGoodOutlinedIcon,
     title: 'Add Location'
   },
   {
     href: '/app/settings',
-    icon: SettingsIcon,
+    icon: SettingsInputComponentOutlinedIcon,
     title: 'Settings'
   },
   {
     href: '/login',
-    icon: LockIcon,
-    title: 'Login'
-  },
-  // {
-  //   href: '/register',
-  //   icon: UserPlusIcon,
-  //   title: 'Register'
-  // },
-  // {
-  //   href: '/404',
-  //   icon: AlertCircleIcon,
-  //   title: 'Error'
-  // }
+    icon: ExitToAppOutlinedIcon,
+    title: 'Logout'
+  }
 ];
 
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {
@@ -112,16 +86,10 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
           }}
           to="/app/account"
         />
-        <Typography
-          color="textPrimary"
-          variant="h5"
-        >
+        <Typography color="textPrimary" variant="h5">
           {user.name}
         </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
+        <Typography color="textSecondary" variant="body2">
           {user.jobTitle}
         </Typography>
       </Box>
@@ -139,11 +107,6 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
         </List>
       </Box>
       <Box sx={{ flexGrow: 1 }} />
-     
-        
-       
-       
-     
     </Box>
   );
 
@@ -190,8 +153,7 @@ DashboardSidebar.propTypes = {
 };
 
 DashboardSidebar.defaultProps = {
-  onMobileClose: () => {
-  },
+  onMobileClose: () => {},
   openMobile: false
 };
 

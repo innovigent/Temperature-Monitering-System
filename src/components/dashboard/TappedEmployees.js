@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
+import { red, green, amber } from '@material-ui/core/colors';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Box,
@@ -111,7 +112,19 @@ const LatestOrders = (props) => (
                   {moment(order.createdAt).format('DD/MM/YYYY')}
                 </TableCell>
                 <TableCell>
-                  <Chip color="primary" label={order.status} size="small" />
+                  <Chip
+                    sx={{
+                      backgroundColor:
+                        order.status === 'high'
+                          ? red[400]
+                          : order.status === 'low'
+                          ? green[400]
+                          : amber[400]
+                    }}
+                    color="primary"
+                    label={order.status}
+                    size="small"
+                  />
                 </TableCell>
               </TableRow>
             ))}
