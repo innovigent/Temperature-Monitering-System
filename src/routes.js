@@ -25,6 +25,7 @@ const routes = [
       { path: 'employees', element: <CustomerList /> },
       { path: 'dashboard', element: <Dashboard /> },
       { path: 'tapped/employees', element: <ProductList /> },
+      { path: 'flagged/employees', element: <MovementFlaged /> },
       { path: 'Adduserfil', element: <Adduserfil /> },
       { path: 'settings', element: <Settings /> },
       { path: 'Addcompanypage', element: <Addcompanypage /> },

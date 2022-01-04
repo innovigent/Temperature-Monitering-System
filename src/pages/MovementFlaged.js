@@ -1,17 +1,13 @@
 import { Helmet } from 'react-helmet';
-import {
-  Box,
-  Container,
-  Grid
-} from '@material-ui/core';
+import { Box, Container, Grid } from '@material-ui/core';
 import AccountProfile from '../components/account/AccountProfile';
 import AccountProfileDetails from '../components/account/AccountProfileDetails';
 import Companydetails from '../components/addorganization/organization';
-import CustomerListResults from '../components/customer/movementflaged';
+import CustomerListResults from '../components/dashboard/HighTempEmployeesList';
 
- const Addmovementflag = () => (
+const Addmovementflag = () => (
   <>
-         <Helmet>
+    <Helmet>
       <title>Account | Material Kit</title>
     </Helmet>
     <Box
@@ -21,13 +17,10 @@ import CustomerListResults from '../components/customer/movementflaged';
         py: 3
       }}
     >
-      
-      <Container maxWidth="lg">    
-           <Box sx={{ pt: 3 }}>
-             <CustomerListResults/>
-            </Box>
-    
-       
+      <Container maxWidth="xxlg">
+        <Box>
+          <CustomerListResults />
+        </Box>
       </Container>
     </Box>
   </>

@@ -39,11 +39,11 @@ const items = [
     icon: FmdGoodOutlinedIcon,
     title: 'Add Location'
   },
-  {
-    href: '/app/settings',
-    icon: SettingsInputComponentOutlinedIcon,
-    title: 'Settings'
-  },
+  // {
+  //   href: '/app/settings',
+  //   icon: SettingsInputComponentOutlinedIcon,
+  //   title: 'Settings'
+  // },
   {
     href: '/login',
     icon: ExitToAppOutlinedIcon,

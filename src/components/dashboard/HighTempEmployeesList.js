@@ -1,5 +1,4 @@
 import moment from 'moment';
-import { v4 as uuid } from 'uuid';
 import { red, green, amber } from '@material-ui/core/colors';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -21,7 +20,7 @@ import {
 } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
-const LatestOrders = (props) => {
+const HighTempEmployeesList = (props) => {
   const token = localStorage.getItem('Token');
   const headers = {
     headers: {
@@ -36,15 +35,13 @@ const LatestOrders = (props) => {
         const res = await axios.get(
           'https://project-tnt-api.herokuapp.com/api/v1/organizations/' +
             localStorage.getItem('organization') +
-            '/movements',
+            '/movements/flagged',
           headers
         );
 
         if (res.status === 200) {
           console.log(res);
-          window.location.pathname.includes('tapped/employees')
-            ? setEmployees(res.data.data.movementLogs)
-            : setEmployees(res.data.data.movementLogs.slice(0, 5));
+          setEmployees(res.data.data.movementLogs);
         }
       } catch (error) {
         console.log(error);
@@ -55,7 +52,7 @@ const LatestOrders = (props) => {
 
   return (
     <Card {...props}>
-      <CardHeader title="Card Tapped Employees" />
+      <CardHeader title="High Temp Employees" />
       <Divider />
       <PerfectScrollbar>
         <Box sx={{ minWidth: 800 }}>
@@ -114,29 +111,8 @@ const LatestOrders = (props) => {
           </Table>
         </Box>
       </PerfectScrollbar>
-      {window.location.pathname.includes('tapped/employees') ? (
-        ''
-      ) : (
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            p: 2
-          }}
-        >
-          <Button
-            color="primary"
-            endIcon={<ArrowRightIcon />}
-            size="small"
-            variant="text"
-            onClick={() => (window.location.href = '/app/tapped/employees')}
-          >
-            View all
-          </Button>
-        </Box>
-      )}
     </Card>
   );
 };
 
-export default LatestOrders;
+export default HighTempEmployeesList;
