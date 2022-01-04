@@ -45,7 +45,9 @@ const Location = () => {
 
       // const body = {email, firstName,lastName,mobile,epfNo,permission};
       const loginResponse = await axios.post(
-        'https://project-tnt-api.herokuapp.com/api/v1/organizations/3/locations',
+        'https://project-tnt-api.herokuapp.com/api/v1/organizations/' +
+          localStorage.getItem('organization') +
+          '/locations',
         body,
         {
           //body: formData,

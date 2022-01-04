@@ -42,9 +42,10 @@ const CustomerListResults = ({ customers, ...rest }) => {
   const renderOrderBody = (item, index) => (
     <tr key={index}>
       {console.log(item)}
-      <td>{item.firstName}</td>
-      <td>{item.lastName}</td>
-      <td>{item.email}</td>
+      <td>{item.id}</td>
+      <td>{item.name}</td>
+      <td>{item.limit}</td>
+      <td>{item.count}</td>
       <td>
         <button className="usertblbutton">Delete</button>
       </td>
@@ -52,21 +53,23 @@ const CustomerListResults = ({ customers, ...rest }) => {
   );
 
   useEffect(() => {
-    const fetchData = async () => {};
-    const fetchData1 = async () => {
+    // const fetchData = async () => {};
+    const fetchData = async () => {
       setLoading(true);
 
       const result = await axios(
-        `https://project-tnt-api.herokuapp.com/api/v1/users`,
+        `https://project-tnt-api.herokuapp.com/api/v1/organizations/${localStorage.getItem(
+          'organization'
+        )}/locationList`,
         headers
       );
-      console.log(result.data.data.user);
-      setListData([result.data.data.user]);
+      console.log(result.data.data);
+      setListData(result.data.data.locationsInfo);
       setLoading(false);
     };
 
     fetchData();
-    fetchData1();
+    // fetchData1();
   }, []);
 
   const handleSelectAll = (event) => {
@@ -122,15 +125,14 @@ const CustomerListResults = ({ customers, ...rest }) => {
                   <Checkbox
                     /* checked={listData.length === listData.length}*/
                     color="primary"
-                    indeterminate={
-                      listData.length > 0 && listData.length < listData.length
-                    }
+                    indeterminate={listData.length > 0}
                     onChange={handleSelectAll}
                   />
                 </TableCell>
+                <TableCell>ID</TableCell>
                 <TableCell>Name</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Location</TableCell>
+                <TableCell>Limit</TableCell>
+                <TableCell>Count</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -154,16 +156,17 @@ const CustomerListResults = ({ customers, ...rest }) => {
                         display: 'flex'
                       }}
                     >
-                      <Avatar src={customer.avatarUrl} sx={{ mr: 2 }}>
+                      {/* <Avatar src={customer.avatarUrl} sx={{ mr: 2 }}>
                         {getInitials(customer.name)}
-                      </Avatar>
+                      </Avatar> */}
                       <Typography color="textPrimary" variant="body1">
-                        {customer.firstName}
+                        {customer.id}
                       </Typography>
                     </Box>
                   </TableCell>
-                  <TableCell>{customer.email}</TableCell>
-                  <TableCell>{customer.lastName}</TableCell>
+                  <TableCell>{customer.name}</TableCell>
+                  <TableCell>{customer.limit}</TableCell>
+                  <TableCell>{customer.count}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
