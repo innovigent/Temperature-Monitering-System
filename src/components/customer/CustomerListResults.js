@@ -124,7 +124,7 @@ const CustomerListResults = ({ employees, ...rest }) => {
                     </Box>
                   </TableCell>
                   <TableCell>{customer.email}</TableCell>
-                  <TableCell>${customer.rfid}</TableCell>
+                  <TableCell>{customer.rfid}</TableCell>
                   <TableCell>{customer.phone}</TableCell>
                   <TableCell>
                     {moment(customer.createdAt).format('DD/MM/YYYY')}

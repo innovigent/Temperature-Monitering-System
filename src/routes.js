@@ -24,7 +24,7 @@ const routes = [
       { path: 'account', element: <Account /> },
       { path: 'employees', element: <CustomerList /> },
       { path: 'dashboard', element: <Dashboard /> },
-      { path: 'products', element: <ProductList /> },
+      { path: 'tapped/employees', element: <ProductList /> },
       { path: 'Adduserfil', element: <Adduserfil /> },
       { path: 'settings', element: <Settings /> },
       { path: 'Addcompanypage', element: <Addcompanypage /> },

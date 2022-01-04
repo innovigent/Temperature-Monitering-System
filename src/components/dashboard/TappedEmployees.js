@@ -132,22 +132,27 @@ const LatestOrders = (props) => (
         </Table>
       </Box>
     </PerfectScrollbar>
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'flex-end',
-        p: 2
-      }}
-    >
-      <Button
-        color="primary"
-        endIcon={<ArrowRightIcon />}
-        size="small"
-        variant="text"
+    {window.location.pathname.includes('tapped/employees') ? (
+      ''
+    ) : (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          p: 2
+        }}
       >
-        View all
-      </Button>
-    </Box>
+        <Button
+          color="primary"
+          endIcon={<ArrowRightIcon />}
+          size="small"
+          variant="text"
+          onClick={() => (window.location.href = '/app/tapped/employees')}
+        >
+          View all
+        </Button>
+      </Box>
+    )}
   </Card>
 );
 

@@ -1,17 +1,13 @@
 import { Helmet } from 'react-helmet';
-import {
-  Box,
-  Container,
-  Grid
-} from '@material-ui/core';
+import { Box, Container, Grid } from '@material-ui/core';
 import AccountProfile from '../components/account/AccountProfile';
 import AccountProfileDetails from '../components/account/AccountProfileDetails';
 import Companydetails from '../components/addorganization/organization';
 import CustomerListResults from '../components/customer/Organizations';
 
- const Addcompanypage = () => (
+const Addcompanypage = () => (
   <>
-         <Helmet>
+    <Helmet>
       <title>Account | Material Kit</title>
     </Helmet>
     <Box
@@ -21,14 +17,11 @@ import CustomerListResults from '../components/customer/Organizations';
         py: 3
       }}
     >
-      
-      <Container maxWidth="lg">    
-           <Box sx={{ pt: 3 }}>
-              <Companydetails />
-            </Box>
-           
-          <CustomerListResults/>
-       
+      <Container maxWidth="xxlg">
+        <Box>
+          <Companydetails />
+        </Box>
+        <CustomerListResults />
       </Container>
     </Box>
   </>
