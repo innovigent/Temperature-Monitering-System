@@ -9,11 +9,11 @@ import {
   colors,
   useTheme
 } from '@material-ui/core';
-import LaptopMacIcon from '@material-ui/icons/LaptopMac';
-import PhoneIcon from '@material-ui/icons/Phone';
-import TabletIcon from '@material-ui/icons/Tablet';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
-const TrafficByDevice = (props) => {
+const TempStatsToday = (props) => {
   const theme = useTheme();
 
   const data = {
@@ -21,16 +21,16 @@ const TrafficByDevice = (props) => {
       {
         data: [63, 15, 22],
         backgroundColor: [
-          colors.indigo[500],
-          colors.red[600],
-          colors.orange[600]
+          colors.red[400],
+          colors.amber[500],
+          colors.green[500]
         ],
         borderWidth: 8,
         borderColor: colors.common.white,
         hoverBorderColor: colors.common.white
       }
     ],
-    labels: ['Desktop', 'Tablet', 'Mobile']
+    labels: ['High', 'Normal', 'Low']
   };
 
   const options = {
@@ -57,28 +57,28 @@ const TrafficByDevice = (props) => {
 
   const devices = [
     {
-      title: 'Desktop',
+      title: 'High',
       value: 63,
-      icon: LaptopMacIcon,
-      color: colors.indigo[500]
+      icon: ArrowUpwardIcon,
+      color: colors.red[400]
     },
     {
-      title: 'Tablet',
+      title: 'Normal',
       value: 15,
-      icon: TabletIcon,
-      color: colors.red[600]
+      icon: ArrowForwardIcon,
+      color: colors.amber[500]
     },
     {
-      title: 'Mobile',
+      title: 'Low',
       value: 23,
-      icon: PhoneIcon,
-      color: colors.orange[600]
+      icon: ArrowDownwardIcon,
+      color: colors.green[500]
     }
   ];
 
   return (
     <Card {...props}>
-      <CardHeader title="Traffic by Device" />
+      <CardHeader title="Temperature Stats Today" />
       <Divider />
       <CardContent>
         <Box
@@ -87,10 +87,7 @@ const TrafficByDevice = (props) => {
             position: 'relative'
           }}
         >
-          <Doughnut
-            data={data}
-            options={options}
-          />
+          <Doughnut data={data} options={options} />
         </Box>
         <Box
           sx={{
@@ -99,12 +96,7 @@ const TrafficByDevice = (props) => {
             pt: 2
           }}
         >
-          {devices.map(({
-            color,
-            icon: Icon,
-            title,
-            value
-          }) => (
+          {devices.map(({ color, icon: Icon, title, value }) => (
             <Box
               key={title}
               sx={{
@@ -113,18 +105,11 @@ const TrafficByDevice = (props) => {
               }}
             >
               <Icon color="action" />
-              <Typography
-                color="textPrimary"
-                variant="body1"
-              >
+              <Typography color="textPrimary" variant="body1">
                 {title}
               </Typography>
-              <Typography
-                style={{ color }}
-                variant="h2"
-              >
-                {value}
-                %
+              <Typography style={{ color }} variant="h2">
+                {value}%
               </Typography>
             </Box>
           ))}
@@ -134,4 +119,4 @@ const TrafficByDevice = (props) => {
   );
 };
 
-export default TrafficByDevice;
+export default TempStatsToday;

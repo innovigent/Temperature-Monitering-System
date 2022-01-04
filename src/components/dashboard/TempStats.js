@@ -12,29 +12,39 @@ import {
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
-const Sales = (props) => {
+const TempStats = (props) => {
   const theme = useTheme();
 
   const data = {
     datasets: [
       {
-        backgroundColor: colors.indigo[500],
+        backgroundColor: colors.green[500],
         barPercentage: 0.5,
         barThickness: 12,
         borderRadius: 4,
         categoryPercentage: 0.5,
         data: [18, 5, 19, 27, 29, 19, 20],
-        label: 'This year',
+        label: 'High Temperature',
         maxBarThickness: 10
       },
       {
-        backgroundColor: colors.grey[200],
+        backgroundColor: colors.amber[400],
         barPercentage: 0.5,
         barThickness: 12,
         borderRadius: 4,
         categoryPercentage: 0.5,
         data: [11, 20, 12, 29, 30, 25, 13],
-        label: 'Last year',
+        label: 'Normal Temperature',
+        maxBarThickness: 10
+      },
+      {
+        backgroundColor: colors.red[400],
+        barPercentage: 0.5,
+        barThickness: 12,
+        borderRadius: 4,
+        categoryPercentage: 0.5,
+        data: [8, 15, 10, 39, 33, 15, 9],
+        label: 'Low Temperature',
         maxBarThickness: 10
       }
     ],
@@ -95,16 +105,12 @@ const Sales = (props) => {
   return (
     <Card {...props}>
       <CardHeader
-        action={(
-          <Button
-            endIcon={<ArrowDropDownIcon />}
-            size="small"
-            variant="text"
-          >
+        action={
+          <Button endIcon={<ArrowDropDownIcon />} size="small" variant="text">
             Last 7 days
           </Button>
-        )}
-        title="Latest Sales"
+        }
+        title="Temperature Stats"
       />
       <Divider />
       <CardContent>
@@ -114,10 +120,7 @@ const Sales = (props) => {
             position: 'relative'
           }}
         >
-          <Bar
-            data={data}
-            options={options}
-          />
+          <Bar data={data} options={options} />
         </Box>
       </CardContent>
       <Divider />
@@ -141,4 +144,4 @@ const Sales = (props) => {
   );
 };
 
-export default Sales;
+export default TempStats;

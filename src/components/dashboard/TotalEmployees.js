@@ -10,36 +10,22 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import MoneyIcon from '@material-ui/icons/Money';
 import { red } from '@material-ui/core/colors';
 
-const Budget = (props) => (
-  <Card
-    sx={{ height: '100%' }}
-    {...props}
-  >
+const TotalEmployees = (props) => (
+  <Card sx={{ height: '100%' }} {...props}>
     <CardContent>
-      <Grid
-        container
-        spacing={3}
-        sx={{ justifyContent: 'space-between' }}
-      >
+      <Grid container spacing={3} sx={{ justifyContent: 'space-between' }}>
         <Grid item>
-          <Typography
-            color="textSecondary"
-            gutterBottom
-            variant="h6"
-          >
-            BUDGET
+          <Typography color="textSecondary" gutterBottom variant="h6">
+            TOTAL EMPLOYEES
           </Typography>
-          <Typography
-            color="textPrimary"
-            variant="h3"
-          >
-            $24,000
+          <Typography color="textPrimary" variant="h3">
+            300
           </Typography>
         </Grid>
         <Grid item>
           <Avatar
             sx={{
-              backgroundColor: red[600],
+              backgroundColor: red[400],
               height: 56,
               width: 56
             }}
@@ -55,25 +41,22 @@ const Budget = (props) => (
           alignItems: 'center'
         }}
       >
-        <ArrowDownwardIcon sx={{ color: red[900] }} />
+        <ArrowDownwardIcon sx={{ color: red[400] }} />
         <Typography
           sx={{
-            color: red[900],
+            color: red[400],
             mr: 1
           }}
           variant="body2"
         >
           12%
         </Typography>
-        <Typography
-          color="textSecondary"
-          variant="caption"
-        >
-          Since last month
+        <Typography color="textSecondary" variant="caption">
+          Since yesterday
         </Typography>
       </Box>
     </CardContent>
   </Card>
 );
 
-export default Budget;
+export default TotalEmployees;
