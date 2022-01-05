@@ -45,7 +45,7 @@ const items = [
   //   title: 'Settings'
   // },
   {
-    href: '/login',
+    href: '/',
     icon: ExitToAppOutlinedIcon,
     title: 'Logout'
   }
@@ -84,7 +84,7 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
             width: 64,
             height: 64
           }}
-          to="/app/account"
+          to="/app/dashboard"
         />
         <Typography color="textPrimary" variant="h5">
           {user.name}
@@ -98,6 +98,9 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
         <List>
           {items.map((item) => (
             <NavItem
+              onClick={() =>
+                item.title === 'Logout' ? localStorage.clear() : null
+              }
               href={item.href}
               key={item.title}
               title={item.title}

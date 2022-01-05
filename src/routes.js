@@ -39,7 +39,7 @@ const routes = [
     path: '/',
     element: <MainLayout />,
     children: [
-      { path: 'login', element: <Login /> },
+      { path: '', element: <Login /> },
       { path: 'forgot', element: <Forgetpassword /> },
       { path: 'register', element: <Register /> },
       { path: '404', element: <NotFound /> },
