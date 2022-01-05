@@ -13,6 +13,7 @@ import {
 import axios from 'axios';
 
 const Forgetpassword = () => {
+  document.title = 'Forget Password';
   const [email, setEmail] = useState('');
   const [err, setErr] = useState('');
 
