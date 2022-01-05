@@ -32,12 +32,12 @@ const items = [
   {
     href: '/app/employees',
     icon: GroupOutlinedIcon,
-    title: 'Add Employees'
+    title: 'Employees'
   },
   {
     href: '/app/Location',
     icon: FmdGoodOutlinedIcon,
-    title: 'Add Location'
+    title: 'Locations'
   },
   // {
   //   href: '/app/settings',

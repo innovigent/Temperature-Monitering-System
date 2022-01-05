@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Button,
@@ -7,16 +7,13 @@ import {
   CardHeader,
   Divider,
   TextField,
-  Container
+  Container,
+  Alert
 } from '@material-ui/core';
-
-import txt from 'src/token.txt';
 import axios from 'axios';
-import { HashLoader } from 'react-spinners';
 
 const Forgetpassword = () => {
-  const [email, setemail] = useState();
-  const [loading, setLoading] = useState(true);
+  const [email, setEmail] = useState('');
   const [err, setErr] = useState('');
 
   const submit = async (e) => {
@@ -24,25 +21,13 @@ const Forgetpassword = () => {
     setErr('');
     try {
       const body = { email };
-      //   const formData = new FormData()
-
-      //   formData.append("name", locationname);
-
-      //  formData.append("limit", max);
-      //   formData.append("count", count);
-
-      // const body = {email, firstName,lastName,mobile,epfNo,permission};
       const loginResponse = await axios.post(
         'https://project-tnt-api.herokuapp.com/api/v1/users/forgotpasswordverify',
         body
-        //body: formData,
-
-        //credentials: 'include',
       );
-
-      window.location.reload();
     } catch (err) {
-      err.response.data.message && setErr(err.response.data.message);
+      console.log(err.response);
+      err.response.data.msg && setErr(err.response.data.msg);
     }
   };
 
@@ -59,6 +44,11 @@ const Forgetpassword = () => {
       >
         <form onSubmit={submit}>
           <Card maxWidth="lg">
+            {err && (
+              <Alert severity="error" sx={{ mb: 4 }}>
+                {err}
+              </Alert>
+            )}
             <CardHeader subheader="Send Email" title="Forgot Passowrd" />
             <Divider />
             <CardContent>
@@ -67,7 +57,7 @@ const Forgetpassword = () => {
                 label="Enter your email"
                 margin="normal"
                 name="email"
-                onChange={(e) => setemail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 value={email}
                 variant="outlined"
