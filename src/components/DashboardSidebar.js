@@ -32,12 +32,12 @@ const items = [
   {
     href: '/app/employees',
     icon: GroupOutlinedIcon,
-    title: 'Add Employees'
+    title: 'Employees'
   },
   {
     href: '/app/Location',
     icon: FmdGoodOutlinedIcon,
-    title: 'Add Location'
+    title: 'Locations'
   },
   // {
   //   href: '/app/settings',
@@ -45,7 +45,7 @@ const items = [
   //   title: 'Settings'
   // },
   {
-    href: '/login',
+    href: '',
     icon: ExitToAppOutlinedIcon,
     title: 'Logout'
   }
@@ -84,7 +84,7 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
             width: 64,
             height: 64
           }}
-          to="/app/account"
+          to="/app/dashboard"
         />
         <Typography color="textPrimary" variant="h5">
           {user.name}
@@ -98,6 +98,12 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
         <List>
           {items.map((item) => (
             <NavItem
+              onClick={() => {
+                if (item.title === 'Logout') {
+                  localStorage.clear();
+                  window.location.href = '/';
+                }
+              }}
               href={item.href}
               key={item.title}
               title={item.title}

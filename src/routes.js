@@ -24,6 +24,7 @@ const routes = [
       { path: 'account', element: <Account /> },
       { path: 'employees', element: <CustomerList /> },
       { path: 'dashboard', element: <Dashboard /> },
+      { path: 'register', element: <Register /> },
       { path: 'tapped/employees', element: <ProductList /> },
       { path: 'flagged/employees', element: <MovementFlaged /> },
       { path: 'Adduserfil', element: <Adduserfil /> },
@@ -39,9 +40,8 @@ const routes = [
     path: '/',
     element: <MainLayout />,
     children: [
-      { path: 'login', element: <Login /> },
+      { path: '', element: <Login /> },
       { path: 'forgot', element: <Forgetpassword /> },
-      { path: 'register', element: <Register /> },
       { path: '404', element: <NotFound /> },
       { path: '/dashboard', element: <Navigate to="/app/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> }
