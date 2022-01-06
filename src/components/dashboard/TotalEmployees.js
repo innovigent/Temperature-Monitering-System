@@ -19,7 +19,7 @@ const TotalEmployees = (props) => {
       Authorization: `Bearer ${token}`
     }
   };
-  const [count, setCount] = useState([]);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const getEmps = async () => {
