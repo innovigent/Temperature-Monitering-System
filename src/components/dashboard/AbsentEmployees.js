@@ -19,7 +19,7 @@ const AbsentEmployees = (props) => (
             ABSENT EMPLOYEES
           </Typography>
           <Typography color="textPrimary" variant="h3">
-            80
+            {props.total - props.entered}
           </Typography>
         </Grid>
         <Grid item>

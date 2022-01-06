@@ -32,6 +32,7 @@ const TotalEmployees = (props) => {
         );
 
         if (res.status === 200) {
+          props.setTotal(res.data.data.employees.length);
           setCount(res.data.data.employees.length);
         }
       } catch (error) {

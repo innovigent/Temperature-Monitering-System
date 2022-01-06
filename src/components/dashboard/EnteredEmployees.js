@@ -33,6 +33,13 @@ const EnteredEmployees = (props) => {
 
         if (res.status === 200) {
           console.log(res);
+          props.setEntered(
+            res.data.data.movementLogs.filter(
+              (log) =>
+                new Date(log.createdAt).toLocaleDateString() ===
+                new Date().toLocaleDateString()
+            ).length
+          );
           setCount(
             res.data.data.movementLogs.filter(
               (log) =>
