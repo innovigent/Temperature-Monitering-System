@@ -33,7 +33,13 @@ const HighTempEmployees = (props) => {
         );
 
         if (res.status === 200) {
-          setCount(res.data.data.movementLogs.length);
+          setCount(
+            res.data.data.movementLogs.filter(
+              (log) =>
+                new Date(log.createdAt).toLocaleDateString() ===
+                new Date().toLocaleDateString()
+            ).length
+          );
         }
       } catch (error) {
         console.log(error);
