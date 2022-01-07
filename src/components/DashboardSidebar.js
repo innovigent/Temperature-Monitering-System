@@ -35,15 +35,15 @@ const items = [
     title: 'Employees'
   },
   {
-    href: '/app/Location',
+    href: '/app/locations',
     icon: FmdGoodOutlinedIcon,
     title: 'Locations'
   },
-  // {
-  //   href: '/app/settings',
-  //   icon: SettingsInputComponentOutlinedIcon,
-  //   title: 'Settings'
-  // },
+  {
+    href: '/app/settings',
+    icon: SettingsInputComponentOutlinedIcon,
+    title: 'Settings'
+  },
   {
     href: '',
     icon: ExitToAppOutlinedIcon,
