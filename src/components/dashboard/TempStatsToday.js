@@ -22,9 +22,9 @@ const TempStatsToday = (props) => {
       Authorization: `Bearer ${token}`
     }
   };
-  const [highCount, setHighCount] = useState([]);
-  const [midCount, setMidCount] = useState([]);
-  const [lowCount, setLowCount] = useState([]);
+  const [highCount, setHighCount] = useState(0);
+  const [midCount, setMidCount] = useState(0);
+  const [lowCount, setLowCount] = useState(0);
 
   useEffect(() => {
     const getEmps = async () => {
