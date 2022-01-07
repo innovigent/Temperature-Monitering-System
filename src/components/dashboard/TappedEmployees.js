@@ -89,7 +89,7 @@ const LatestOrders = (props) => {
                     <Chip
                       sx={{
                         backgroundColor:
-                          order.temperature >= 37.5
+                          order.temperature > 37.5
                             ? red[400]
                             : order.temperature <= 37.5 &&
                               order.temperature >= 36

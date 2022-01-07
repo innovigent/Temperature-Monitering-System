@@ -1,4 +1,5 @@
 import { Doughnut } from 'react-chartjs-2';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Card,
@@ -12,14 +13,68 @@ import {
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import axios from 'axios';
 
 const TempStatsToday = (props) => {
+  const token = localStorage.getItem('Token');
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+  const [highCount, setHighCount] = useState([]);
+  const [midCount, setMidCount] = useState([]);
+  const [lowCount, setLowCount] = useState([]);
+
+  useEffect(() => {
+    const getEmps = async () => {
+      try {
+        const res = await axios.get(
+          'https://project-tnt-api.herokuapp.com/api/v1/organizations/' +
+            localStorage.getItem('organization') +
+            '/movements',
+          headers
+        );
+
+        if (res.status === 200) {
+          console.log(res);
+          setHighCount(
+            res.data.data.movementLogs.filter(
+              (log) =>
+                new Date(log.createdAt).toLocaleDateString() ===
+                  new Date().toLocaleDateString() && log.temperature > 37.5
+            ).length
+          );
+          setMidCount(
+            res.data.data.movementLogs.filter(
+              (log) =>
+                new Date(log.createdAt).toLocaleDateString() ===
+                  new Date().toLocaleDateString() &&
+                log.temperature <= 37.5 &&
+                log.temperature >= 36
+            ).length
+          );
+          setLowCount(
+            res.data.data.movementLogs.filter(
+              (log) =>
+                new Date(log.createdAt).toLocaleDateString() ===
+                  new Date().toLocaleDateString() && log.temperature < 36
+            ).length
+          );
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getEmps();
+  }, []);
+
   const theme = useTheme();
 
   const data = {
     datasets: [
       {
-        data: [63, 15, 22],
+        data: [highCount, midCount, lowCount],
         backgroundColor: [
           colors.red[400],
           colors.amber[500],
@@ -58,19 +113,19 @@ const TempStatsToday = (props) => {
   const devices = [
     {
       title: 'High',
-      value: 63,
+      value: ((highCount / (highCount + midCount + lowCount)) * 100).toFixed(1),
       icon: ArrowUpwardIcon,
       color: colors.red[400]
     },
     {
       title: 'Normal',
-      value: 15,
+      value: ((midCount / (highCount + midCount + lowCount)) * 100).toFixed(1),
       icon: ArrowForwardIcon,
       color: colors.amber[500]
     },
     {
       title: 'Low',
-      value: 23,
+      value: ((lowCount / (highCount + midCount + lowCount)) * 100).toFixed(1),
       icon: ArrowDownwardIcon,
       color: colors.green[500]
     }
