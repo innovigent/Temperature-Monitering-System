@@ -32,7 +32,7 @@ const routes = [
       { path: 'Addcompanypage', element: <Addcompanypage /> },
       { path: 'MovementFlaged', element: <MovementFlaged /> },
       { path: 'Deviceapp', element: <Deviceapp /> },
-      { path: 'Location', element: <Location /> },
+      { path: 'locations', element: <Location /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },
