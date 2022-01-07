@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from 'react';
 import './Model.css';
 import {
   Box,
@@ -7,49 +7,41 @@ import {
   CardContent,
   CardHeader,
   Divider,
-  TextField
+  TextField,
+  Typography
 } from '@material-ui/core';
-import axios from "axios";
-import txt from "src/token.txt";
+import axios from 'axios';
 
-const token = localStorage.getItem("Token")
-     console.log(token);
-    const headers = {
+const token = localStorage.getItem('Token');
+console.log(token);
+const headers = {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+};
 
-        headers: {
-
-            "Authorization":`Bearer ${token}`
-        }
-    };
-
-const Model = (props) =>{
-    const [modal, setModal] = useState(false);
+const Model = (props) => {
+  const [modal, setModal] = useState(false);
   //   const [values, setValues] = useState({
-  //   password: '',
+  //   newpassword: '',
   //   confirm: ''
   // });
   const [oldpassword, setold] = useState();
-  const [password, setpassword] = useState();
-  const [passwordConfirm, setconfirm] = useState();
-  const [err, setErr] = useState("");
+  const [newpassword, setpassword] = useState();
+  const [confirmNewpassword, setconfirm] = useState();
+  const [err, setErr] = useState('');
 
-
-  
-   
-
-  
- 
   const toggleModal = (event) => {
-      setModal(!modal);
-      event.preventDefault();
+    setModal(!modal);
+    event.preventDefault();
   };
 
-  if(modal) {
-    document.body.classList.add('active-modal')
+  if (modal) {
+    document.body.classList.add('active-modal');
   } else {
-    document.body.classList.remove('active-modal')
-    }
-    
+    document.body.classList.remove('active-modal');
+  }
+
   //    const handleChange = (event) => {
   //   setValues({
   //     ...values,
@@ -58,127 +50,108 @@ const Model = (props) =>{
   // };
 
   const submit = async (e) => {
-    console.log("kasun");
-      
-   e.preventDefault();
-        setErr("");
+    e.preventDefault();
+    setErr('');
     try {
-          
-      const body = { oldpassword, password, passwordConfirm }
+      const body = { oldpassword, newpassword, confirmNewpassword };
       console.log(body);
-          //   const formData = new FormData()
 
-            
-          //   formData.append("name", locationname);
-          
-          //  formData.append("limit", max);
-          //   formData.append("count", count);
-       
-            // const body = {email, firstName,lastName,mobile,epfNo,permission};
-            const loginResponse = await axios.post("https://project-tnt-api.herokuapp.com/api/v1/users/3/changepassword/addnewpassword",body, {
-                    //body: formData,
-                    headers: {
-                       
-                        "Authorization": `Bearer ${token}`
-                    },
-                    //credentials: 'include',
-                }
-          );
-        
-            // window.location.reload();
+      const loginResponse = await axios.post(
+        'https://project-tnt-api.herokuapp.com/api/v1/users/' +
+          localStorage.getItem('organization') +
+          '/changepassword/addnewpassword',
+        body,
+        {
+          //body: formData,
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+          //credentials: 'include',
+        }
+      );
 
-        } catch (err) {
-            err.response.data.message && setErr(err.response.data.message)
-        }  
-
-    
-
-      };
-  
+      // window.location.reload();
+    } catch (err) {
+      err.response.data.message && setErr(err.response.data.message);
+    }
+  };
 
   return (
     <>
-      <button onClick={toggleModal} className="btn-modal" color="primary">
-        Open
-      </button>
+      <Button onClick={toggleModal} color="primary">
+        Edit
+      </Button>
 
       {modal && (
         <div className="modal">
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
-            {/* <h2>Update Password</h2> */}
-             <form {...props} onClick={submit}>
-      <Card>
-        <CardHeader
-          subheader="Update password"
-          title=""
-        />
-        <Divider />
-        <CardContent>
-          <TextField
-            fullWidth
-            label="old Password"
-            margin="normal"
-            name="password"
-            onChange={(e) => setold(e.target.value)}
-            type="password"
-            value={oldpassword}
-            variant="outlined"
+            <form {...props} onClick={submit}>
+              <Card>
+                <CardHeader subheader="Update newpassword" title="" />
+                <Divider />
+                <CardContent>
+                  <TextField
+                    fullWidth
+                    label="Old Password"
+                    margin="normal"
+                    name="newpassword"
+                    onChange={(e) => setold(e.target.value)}
+                    type="password"
+                    value={oldpassword}
+                    variant="outlined"
                   />
                   <TextField
-            fullWidth
-            label="New password"
-            margin="normal"
-            name="password"
-            onChange={(e) => setpassword(e.target.value)}
-            type="password"
-            value={password}
-            variant="outlined"
-          /> 
-           <TextField
-            fullWidth
-            label="Confirm password"
-            margin="normal"
-            name="confirm"
+                    fullWidth
+                    label="New Password"
+                    margin="normal"
+                    name="newpassword"
+                    onChange={(e) => setpassword(e.target.value)}
+                    type="password"
+                    value={newpassword}
+                    variant="outlined"
+                  />
+                  <TextField
+                    fullWidth
+                    label="Confirm Password"
+                    margin="normal"
+                    name="confirm"
                     onChange={(e) => {
                       setconfirm(e.target.value);
-                      console.log(passwordConfirm)
+                      console.log(confirmNewpassword);
                     }}
-            type="password"
-            value={passwordConfirm}
-            variant="outlined"
-          /> 
-
-         
-         
-
-        </CardContent>
-        <Divider />
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            p: 2
-          }}
-        >
-          <Button
-            color="primary"
-                    variant="contained"
+                    type="password"
+                    value={confirmNewpassword}
+                    variant="outlined"
+                  />
+                </CardContent>
+                <Divider />
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    p: 2
+                  }}
+                >
+                  <Button
+                    color="primary"
+                    variant="text"
                     type="submit"
-          >
-            Update
-          </Button>
-        </Box>
-      </Card>
-    </form>
-            <button  color="red" className="close-modal" onClick={toggleModal}>
-              CLOSE
-            </button>
+                    onClick={toggleModal}
+                    sx={{ mr: 2 }}
+                  >
+                    Close
+                  </Button>
+                  <Button color="primary" variant="contained" type="submit">
+                    Update
+                  </Button>
+                </Box>
+              </Card>
+            </form>
           </div>
         </div>
       )}
-     
     </>
   );
-}
+};
 export default Model;
