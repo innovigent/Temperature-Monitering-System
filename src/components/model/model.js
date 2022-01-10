@@ -86,7 +86,7 @@ const Model = (props) => {
         <div className="modal">
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
-            <form {...props} onClick={submit}>
+            <form {...props} onSubmit={submit}>
               <Card>
                 <CardHeader subheader="Update newpassword" title="" />
                 <Divider />
@@ -136,7 +136,6 @@ const Model = (props) => {
                   <Button
                     color="primary"
                     variant="text"
-                    type="submit"
                     onClick={toggleModal}
                     sx={{ mr: 2 }}
                   >
