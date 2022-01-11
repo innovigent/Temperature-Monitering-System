@@ -90,6 +90,7 @@ const LocationSettings = (props) => {
               <Switch
                 checked={device.statusId === 1 ? true : false}
                 onChange={() => handleChange(device.statusId, device.id)}
+                sx={{ zIndex: 0 }}
               />
             </Box>
           );
