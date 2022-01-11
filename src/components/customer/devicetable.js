@@ -1,4 +1,4 @@
-import { useState ,useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -17,77 +17,54 @@ import {
 } from '@material-ui/core';
 import getInitials from '../../utils/getInitials';
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 
-
-
-const token = localStorage.getItem("Token")
-     console.log(token);
-    const headers = {
-
-        headers: {
-
-            "Authorization":`Bearer ${token}`
-        }
-    };
-
+const token = localStorage.getItem('Token');
+const headers = {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+};
 
 const CustomerListResults = ({ customers, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
-    
-  const [listData, setListData] = useState(  [] );
-  const [text, setText] = useState("");
-  
+
+  const [listData, setListData] = useState([]);
+  const [text, setText] = useState('');
+
   const [loading, setLoading] = useState(true);
 
-  
-  const renderOrderHead = (item, index) => (
-    <th key={index}>{item}</th>
-)
-const renderOrderBody = (item, index) => (
-  <tr key={index}>
-    {console.log(item)}
-        <td>{item.firstName}</td>
-      
-        <td>
-            <button className="usertblbutton" >Delete</button>
-        </td>
+  const renderOrderHead = (item, index) => <th key={index}>{item}</th>;
+  const renderOrderBody = (item, index) => (
+    <tr key={index}>
+      <td>{item.firstName}</td>
+
+      <td>
+        <button className="usertblbutton">Delete</button>
+      </td>
     </tr>
-)
+  );
 
-      useEffect(() => {
-        const fetchData = async () => {
-     
-        };
-        const fetchData1 = async () => {
-            setLoading(true);
+  useEffect(() => {
+    const fetchData = async () => {};
+    const fetchData1 = async () => {
+      setLoading(true);
 
-          
-            const result = await axios(
-                `https://project-tnt-api.herokuapp.com/api/v1/devicetypes`,headers
-            );
-            console.log(result.data.data.deviceTypes[0]);
-          console.log(result.data.data.deviceTypes);
-          setListData(  [result.data.data.deviceTypes[0]] );
-            setLoading(false);
-        };
+      const result = await axios(
+        `https://project-tnt-api.herokuapp.com/api/v1/devicetypes`,
+        headers
+      );
 
+      setListData([result.data.data.deviceTypes[0]]);
+      setLoading(false);
+    };
 
-        fetchData();
-        fetchData1();
-
-    }, []);
-
-
-
-
-
-   
-
-   
+    fetchData();
+    fetchData1();
+  }, []);
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
@@ -110,7 +87,9 @@ const renderOrderBody = (item, index) => (
     } else if (selectedIndex === 0) {
       newSelectedCustomerIds = newSelectedCustomerIds.concat(listData.slice(1));
     } else if (selectedIndex === selectedCustomerIds.length - 1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(listData.slice(0, -1));
+      newSelectedCustomerIds = newSelectedCustomerIds.concat(
+        listData.slice(0, -1)
+      );
     } else if (selectedIndex > 0) {
       newSelectedCustomerIds = newSelectedCustomerIds.concat(
         listData.slice(0, selectedIndex),
@@ -138,23 +117,17 @@ const renderOrderBody = (item, index) => (
               <TableRow>
                 <TableCell padding="checkbox">
                   <Checkbox
-                   /* checked={listData.length === listData.length}*/
+                    /* checked={listData.length === listData.length}*/
                     color="primary"
                     indeterminate={
-                      listData.length > 0
-                      && listData.length < listData.length
+                      listData.length > 0 && listData.length < listData.length
                     }
                     onChange={handleSelectAll}
                   />
                 </TableCell>
-                <TableCell>
-                  ID
-                </TableCell>
-               
-                <TableCell>
-                  Name
-                </TableCell>
-               
+                <TableCell>ID</TableCell>
+
+                <TableCell>Name</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -178,23 +151,12 @@ const renderOrderBody = (item, index) => (
                         display: 'flex'
                       }}
                     >
-                     
-                      <Typography
-                        color="textPrimary"
-                        variant="body1"
-                              >
-                      {customer.id}
+                      <Typography color="textPrimary" variant="body1">
+                        {customer.id}
                       </Typography>
                     </Box>
-                      </TableCell>
-                      <TableCell>
-                                
-                          {customer.name}
-                         {console.log(customers)} 
                   </TableCell>
-                  
-                 
-               
+                  <TableCell>{customer.name}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
