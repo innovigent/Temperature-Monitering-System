@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Model.css';
 import {
   Box,
@@ -8,30 +8,23 @@ import {
   CardHeader,
   Divider,
   TextField,
-  Typography
+  Alert
 } from '@material-ui/core';
 import axios from 'axios';
 
 const token = localStorage.getItem('Token');
-console.log(token);
-const headers = {
-  headers: {
-    Authorization: `Bearer ${token}`
-  }
-};
 
 const Model = (props) => {
   const [modal, setModal] = useState(false);
-  //   const [values, setValues] = useState({
-  //   newpassword: '',
-  //   confirm: ''
-  // });
   const [oldpassword, setold] = useState();
   const [newpassword, setpassword] = useState();
   const [confirmNewpassword, setconfirm] = useState();
   const [err, setErr] = useState('');
+  const [success, setSuccess] = useState('');
 
   const toggleModal = (event) => {
+    setErr('');
+    setSuccess('');
     setModal(!modal);
     event.preventDefault();
   };
@@ -42,19 +35,16 @@ const Model = (props) => {
     document.body.classList.remove('active-modal');
   }
 
-  //    const handleChange = (event) => {
-  //   setValues({
-  //     ...values,
-  //     [event.target.name]: event.target.value
-  //   });
-  // };
-
   const submit = async (e) => {
     e.preventDefault();
     setErr('');
+    setSuccess('');
     try {
       const body = { oldpassword, newpassword, confirmNewpassword };
       console.log(body);
+
+      if (newpassword !== confirmNewpassword)
+        return setErr('Passwords do not match');
 
       const loginResponse = await axios.post(
         'https://project-tnt-api.herokuapp.com/api/v1/users/' +
@@ -62,15 +52,22 @@ const Model = (props) => {
           '/changepassword/addnewpassword',
         body,
         {
-          //body: formData,
           headers: {
             Authorization: `Bearer ${token}`
           }
-          //credentials: 'include',
         }
       );
 
-      // window.location.reload();
+      if (loginResponse.status === 200) {
+        setold('');
+        setpassword('');
+        setconfirm('');
+        setSuccess('Updated Successfully');
+
+        setTimeout(() => {
+          setModal(false);
+        }, 2000);
+      }
     } catch (err) {
       err.response.data.message && setErr(err.response.data.message);
     }
@@ -86,9 +83,19 @@ const Model = (props) => {
         <div className="modal">
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
-            <form {...props} onSubmit={submit}>
+            <form {...props}>
+              {err && (
+                <Alert severity="error" sx={{ mb: 4 }}>
+                  {err}
+                </Alert>
+              )}
+              {success && (
+                <Alert severity="success" sx={{ mb: 4 }}>
+                  {success}
+                </Alert>
+              )}
               <Card>
-                <CardHeader subheader="Update newpassword" title="" />
+                <CardHeader title="Update Password" />
                 <Divider />
                 <CardContent>
                   <TextField
@@ -116,10 +123,7 @@ const Model = (props) => {
                     label="Confirm Password"
                     margin="normal"
                     name="confirm"
-                    onChange={(e) => {
-                      setconfirm(e.target.value);
-                      console.log(confirmNewpassword);
-                    }}
+                    onChange={(e) => setconfirm(e.target.value)}
                     type="password"
                     value={confirmNewpassword}
                     variant="outlined"
@@ -141,7 +145,12 @@ const Model = (props) => {
                   >
                     Close
                   </Button>
-                  <Button color="primary" variant="contained" type="submit">
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    type="submit"
+                    onClick={submit}
+                  >
                     Update
                   </Button>
                 </Box>
