@@ -61,6 +61,7 @@ const TempStatsToday = (props) => {
                   new Date().toLocaleDateString() && log.temperature < 36
             ).length
           );
+          console.log(highCount, midCount, lowCount);
         }
       } catch (error) {
         console.log(error);
@@ -113,19 +114,28 @@ const TempStatsToday = (props) => {
   const devices = [
     {
       title: 'High',
-      value: ((highCount / (highCount + midCount + lowCount)) * 100).toFixed(1),
+      value:
+        highCount !== 0
+          ? ((highCount / (highCount + midCount + lowCount)) * 100).toFixed(1)
+          : 0,
       icon: ArrowUpwardIcon,
       color: colors.red[400]
     },
     {
       title: 'Normal',
-      value: ((midCount / (highCount + midCount + lowCount)) * 100).toFixed(1),
+      value:
+        midCount !== 0
+          ? ((midCount / (highCount + midCount + lowCount)) * 100).toFixed(1)
+          : 0,
       icon: ArrowForwardIcon,
       color: colors.amber[500]
     },
     {
       title: 'Low',
-      value: ((lowCount / (highCount + midCount + lowCount)) * 100).toFixed(1),
+      value:
+        lowCount !== 0
+          ? ((lowCount / (highCount + midCount + lowCount)) * 100).toFixed(1)
+          : 0,
       icon: ArrowDownwardIcon,
       color: colors.green[500]
     }
