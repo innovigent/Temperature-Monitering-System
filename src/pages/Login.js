@@ -32,12 +32,19 @@ const Login = () => {
       );
 
       if (loginResponse.status === 200) {
+        console.log(loginResponse.data);
         localStorage.setItem('Token', loginResponse.data.data.token);
+        localStorage.setItem(
+          'name',
+          loginResponse.data.data.user.firstName +
+            ' ' +
+            loginResponse.data.data.user.lastName
+        );
         localStorage.setItem(
           'organization',
           loginResponse.data.data.user.organizations[0].id
         );
-        navigate('app/dashboard');
+        navigate('/app/dashboard');
       }
     } catch (err) {
       err.response.data.message && setErr(err.response.data.message);
