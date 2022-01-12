@@ -17,41 +17,40 @@ import {
 } from '@material-ui/core';
 import NavItem from './NavItem';
 
-const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  jobTitle: 'Admin 01',
-  name: 'Katarina Smith'
-};
-
-const items = [
-  {
-    href: '/app/dashboard',
-    icon: GridViewOutlinedIcon,
-    title: 'Dashboard'
-  },
-  {
-    href: '/app/employees',
-    icon: GroupOutlinedIcon,
-    title: 'Employees'
-  },
-  {
-    href: '/app/locations',
-    icon: FmdGoodOutlinedIcon,
-    title: 'Locations'
-  },
-  {
-    href: '/app/settings',
-    icon: SettingsInputComponentOutlinedIcon,
-    title: 'Settings'
-  },
-  {
-    href: '',
-    icon: ExitToAppOutlinedIcon,
-    title: 'Logout'
-  }
-];
-
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {
+  const user = {
+    avatar: '/static/images/avatars/avatar_6.png',
+    jobTitle: 'Manager',
+    name: localStorage.getItem('name')
+  };
+
+  const items = [
+    {
+      href: '/app/dashboard',
+      icon: GridViewOutlinedIcon,
+      title: 'Dashboard'
+    },
+    {
+      href: '/app/employees',
+      icon: GroupOutlinedIcon,
+      title: 'Employees'
+    },
+    {
+      href: '/app/locations',
+      icon: FmdGoodOutlinedIcon,
+      title: 'Locations'
+    },
+    {
+      href: '/app/settings',
+      icon: SettingsInputComponentOutlinedIcon,
+      title: 'Settings'
+    },
+    {
+      href: '',
+      icon: ExitToAppOutlinedIcon,
+      title: 'Logout'
+    }
+  ];
   const location = useLocation();
 
   useEffect(() => {
