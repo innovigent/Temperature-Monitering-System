@@ -66,27 +66,6 @@ const TotalEmployees = (props) => {
             </Avatar>
           </Grid>
         </Grid>
-        <Box
-          sx={{
-            pt: 2,
-            display: 'flex',
-            alignItems: 'center'
-          }}
-        >
-          <ArrowDownwardIcon sx={{ color: red[400] }} />
-          <Typography
-            sx={{
-              color: red[400],
-              mr: 1
-            }}
-            variant="body2"
-          >
-            12%
-          </Typography>
-          <Typography color="textSecondary" variant="caption">
-            Since yesterday
-          </Typography>
-        </Box>
       </CardContent>
     </Card>
   );

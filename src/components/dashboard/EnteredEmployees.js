@@ -55,7 +55,7 @@ const EnteredEmployees = (props) => {
   }, []);
 
   return (
-    <Card {...props}>
+    <Card sx={{ height: '100%' }} {...props}>
       <CardContent>
         <Grid container spacing={3} sx={{ justifyContent: 'space-between' }}>
           <Grid item>
@@ -78,27 +78,6 @@ const EnteredEmployees = (props) => {
             </Avatar>
           </Grid>
         </Grid>
-        <Box
-          sx={{
-            alignItems: 'center',
-            display: 'flex',
-            pt: 2
-          }}
-        >
-          <ArrowUpwardIcon sx={{ color: green[500] }} />
-          <Typography
-            variant="body2"
-            sx={{
-              color: green[500],
-              mr: 1
-            }}
-          >
-            16%
-          </Typography>
-          <Typography color="textSecondary" variant="caption">
-            Since yesterday
-          </Typography>
-        </Box>
       </CardContent>
     </Card>
   );

@@ -34,27 +34,6 @@ const AbsentEmployees = (props) => (
           </Avatar>
         </Grid>
       </Grid>
-      <Box
-        sx={{
-          alignItems: 'center',
-          display: 'flex',
-          pt: 2
-        }}
-      >
-        <ArrowUpwardIcon sx={{ color: green[500] }} />
-        <Typography
-          variant="body2"
-          sx={{
-            color: green[500],
-            mr: 1
-          }}
-        >
-          12%
-        </Typography>
-        <Typography color="textSecondary" variant="caption">
-          Since yesterday
-        </Typography>
-      </Box>
     </CardContent>
   </Card>
 );
