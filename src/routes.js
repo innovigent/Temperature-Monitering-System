@@ -1,9 +1,11 @@
 import { Navigate } from 'react-router-dom';
 import DashboardLayout from './components/DashboardLayout';
+import InnovigentLayout from './components/InnovigentLayout';
 import MainLayout from './components/MainLayout';
 import Account from './pages/Account';
 import CustomerList from './pages/CustomerList';
 import Dashboard from './pages/Dashboard';
+import InnovigentDashboard from './pages/InnovigentDashboard';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import ProductList from './pages/ProductList';
@@ -32,7 +34,26 @@ const routes = [
       { path: 'Addcompanypage', element: <Addcompanypage /> },
       { path: 'MovementFlaged', element: <MovementFlaged /> },
       { path: 'Deviceapp', element: <Deviceapp /> },
-      { path: 'Location', element: <Location /> },
+      { path: 'locations', element: <Location /> },
+      { path: '*', element: <Navigate to="/404" /> }
+    ]
+  },
+  {
+    path: 'innovigent',
+    element: <InnovigentLayout />,
+    children: [
+      { path: 'account', element: <Account /> },
+      { path: 'employees', element: <CustomerList /> },
+      { path: 'dashboard', element: <InnovigentDashboard /> },
+      { path: 'register', element: <Register /> },
+      { path: 'tapped/employees', element: <ProductList /> },
+      { path: 'flagged/employees', element: <MovementFlaged /> },
+      { path: 'Adduserfil', element: <Adduserfil /> },
+      { path: 'settings', element: <Settings /> },
+      { path: 'Addcompanypage', element: <Addcompanypage /> },
+      { path: 'MovementFlaged', element: <MovementFlaged /> },
+      { path: 'Deviceapp', element: <Deviceapp /> },
+      { path: 'locations', element: <Location /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },

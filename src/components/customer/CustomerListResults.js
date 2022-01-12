@@ -15,7 +15,6 @@ import {
   TableRow,
   Typography
 } from '@material-ui/core';
-import getInitials from '../../utils/getInitials';
 
 const CustomerListResults = ({ employees, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);

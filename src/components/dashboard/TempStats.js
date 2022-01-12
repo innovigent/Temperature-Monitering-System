@@ -11,19 +11,107 @@ import {
 } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const TempStats = (props) => {
   const theme = useTheme();
+  const token = localStorage.getItem('Token');
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+  const [highCount, setHighCount] = useState([0, 0, 0, 0, 0, 0, 0]);
+  const [midCount, setMidCount] = useState([0, 0, 0, 0, 0, 0, 0]);
+  const [lowCount, setLowCount] = useState([0, 0, 0, 0, 0, 0, 0]);
+
+  useEffect(() => {
+    const getEmps = async () => {
+      try {
+        const res = await axios.get(
+          'https://project-tnt-api.herokuapp.com/api/v1/organizations/' +
+            localStorage.getItem('organization') +
+            '/movements',
+          headers
+        );
+
+        if (res.status === 200) {
+          console.log(res);
+
+          const currentDate = new Date();
+          const oneJan = new Date(currentDate.getFullYear(), 0, 1);
+          const numberOfDays = Math.floor(
+            (currentDate - oneJan) / (24 * 60 * 60 * 1000)
+          );
+          const result = Math.ceil(
+            (currentDate.getDay() + 1 + numberOfDays) / 7
+          );
+
+          setHighCount(
+            res.data.data.movementLogs.filter((log) => {
+              const currentDate = new Date(log.createdAt);
+              const oneJan = new Date(currentDate.getFullYear(), 0, 1);
+              const numberOfDays = Math.floor(
+                (currentDate - oneJan) / (24 * 60 * 60 * 1000)
+              );
+              const resultTemp = Math.ceil(
+                (currentDate.getDay() + 1 + numberOfDays) / 7
+              );
+              return resultTemp === result && log.temperature > 37.5;
+            })
+          );
+          setMidCount(
+            res.data.data.movementLogs.filter((log) => {
+              const currentDate = new Date(log.createdAt);
+              const oneJan = new Date(currentDate.getFullYear(), 0, 1);
+              const numberOfDays = Math.floor(
+                (currentDate - oneJan) / (24 * 60 * 60 * 1000)
+              );
+              const resultTemp = Math.ceil(
+                (currentDate.getDay() + 1 + numberOfDays) / 7
+              );
+
+              return (
+                resultTemp === result &&
+                log.temperature <= 37.5 &&
+                log.temperature >= 36
+              );
+            })
+          );
+
+          setLowCount(
+            res.data.data.movementLogs.filter((log) => {
+              const currentDate = new Date(log.createdAt);
+              const oneJan = new Date(currentDate.getFullYear(), 0, 1);
+              const numberOfDays = Math.floor(
+                (currentDate - oneJan) / (24 * 60 * 60 * 1000)
+              );
+              const resultTemp = Math.ceil(
+                (currentDate.getDay() + 1 + numberOfDays) / 7
+              );
+
+              return resultTemp === result && log.temperature < 36;
+            })
+          );
+          console.log(highCount, midCount, lowCount);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getEmps();
+  }, []);
 
   const data = {
     datasets: [
       {
-        backgroundColor: colors.green[500],
+        backgroundColor: colors.red[500],
         barPercentage: 0.5,
         barThickness: 12,
         borderRadius: 4,
         categoryPercentage: 0.5,
-        data: [18, 5, 19, 27, 29, 19, 20],
+        data: highCount?.map((count) => count.temperature),
         label: 'High Temperature',
         maxBarThickness: 10
       },
@@ -33,22 +121,30 @@ const TempStats = (props) => {
         barThickness: 12,
         borderRadius: 4,
         categoryPercentage: 0.5,
-        data: [11, 20, 12, 29, 30, 25, 13],
+        data: midCount?.map((count) => count.temperature),
         label: 'Normal Temperature',
         maxBarThickness: 10
       },
       {
-        backgroundColor: colors.red[400],
+        backgroundColor: colors.green[400],
         barPercentage: 0.5,
         barThickness: 12,
         borderRadius: 4,
         categoryPercentage: 0.5,
-        data: [8, 15, 10, 39, 33, 15, 9],
+        data: lowCount?.map((count) => count.temperature),
         label: 'Low Temperature',
         maxBarThickness: 10
       }
     ],
-    labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug']
+    labels: [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday'
+    ]
   };
 
   const options = {

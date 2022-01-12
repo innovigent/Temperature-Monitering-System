@@ -28,7 +28,6 @@ const states = [
 ];
 
 const token = localStorage.getItem('Token');
-console.log(token);
 const headers = {
   headers: {
     Authorization: `Bearer ${token}`
@@ -52,16 +51,7 @@ const AccountProfileDetails = (props) => {
     e.preventDefault();
     setErr('');
     try {
-      // const body = { firstName, lastName, rfid };
-      //   const formData = new FormData()
-
-      //   formData.append("name", locationname);
-
-      //  formData.append("limit", max);
-      //   formData.append("count", count);
-
       const body = { email, firstName, lastName, phone, rfid };
-      console.log(body);
       const loginResponse = await axios.post(
         'https://project-tnt-api.herokuapp.com/api/v1/organizations/' +
           localStorage.getItem('organization') +

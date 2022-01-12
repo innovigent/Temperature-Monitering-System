@@ -6,12 +6,12 @@ import {
   CardContent,
   CardHeader,
   Divider,
-  TextField
+  TextField,
+  Typography
 } from '@material-ui/core';
 
 import Popup from 'reactjs-popup';
-// import 'reactjs-popup/dist/index.css';
-import Model from '../model/model'
+import Model from '../model/model';
 
 const SettingsPassword = (props) => {
   const [values, setValues] = useState({
@@ -27,17 +27,24 @@ const SettingsPassword = (props) => {
   };
 
   return (
-    <form {...props}>
-     
-     
-      
-         
-
-          <label className="updatepassword"><b>Update password</b></label>
-          <Model/>
-
-      
-    </form>
+    <Card sx={{ p: 1 }}>
+      <CardHeader title="Profile Settings" />
+      <Divider />
+      <CardContent>
+        <form {...props}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}
+          >
+            <Typography variant="body1">Update Password</Typography>
+            <Model />
+          </Box>
+        </form>
+      </CardContent>
+    </Card>
   );
 };
 

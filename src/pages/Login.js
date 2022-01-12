@@ -32,14 +32,35 @@ const Login = () => {
       );
 
       if (loginResponse.status === 200) {
+        console.log(loginResponse.data);
         localStorage.setItem('Token', loginResponse.data.data.token);
+        localStorage.setItem(
+          'permission',
+          loginResponse.data.data.user.organizations[0].OrganizationUsers
+            .permissionId
+        );
+        localStorage.setItem(
+          'name',
+          loginResponse.data.data.user.firstName +
+            ' ' +
+            loginResponse.data.data.user.lastName
+        );
         localStorage.setItem(
           'organization',
           loginResponse.data.data.user.organizations[0].id
         );
-        navigate('app/dashboard');
+
+        if (
+          loginResponse.data.data.user.organizations[0].OrganizationUsers
+            .permissionId === 101
+        ) {
+          return navigate('/innovigent/dashboard');
+        }
+
+        navigate('/app/dashboard');
       }
     } catch (err) {
+      console.log(err.response);
       err.response.data.message && setErr(err.response.data.message);
     }
   };
