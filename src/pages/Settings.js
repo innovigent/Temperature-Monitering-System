@@ -24,7 +24,7 @@ const SettingsView = () => (
           <Box sx={{ pt: 3 }}>
             <LocationSettings />
           </Box>
-          <Box sx={{ pt: 3 }}>
+          <Box sx={{ py: 3 }}>
             <Admin />
           </Box>
         </Grid>

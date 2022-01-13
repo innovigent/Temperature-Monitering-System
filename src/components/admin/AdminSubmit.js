@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Alert,
   Box,
   Button,
   Card,
@@ -18,9 +19,11 @@ const headers = {
 };
 
 const AdminSubmit = () => {
-  const [name, setName] = useState('');
-  const [count, setCount] = useState('');
-  const [limit, setLimit] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [epf, setEPF] = useState('');
+  const [phoneNo, setPhone] = useState('');
 
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState('');
@@ -29,11 +32,11 @@ const AdminSubmit = () => {
     e.preventDefault();
     setErr('');
     try {
-      const body = { name, limit, count };
+      const body = { firstName, email, lastName, phoneNo, epf };
       const loginResponse = await axios.post(
-        'https://project-tnt-api.herokuapp.com/api/v1/organizations/' +
+        'https://project-tnt-api.herokuapp.com/api/v1/admin/' +
           localStorage.getItem('organization') +
-          '/locations',
+          '/createAdminUsers',
         body,
         {
           headers: {
@@ -42,8 +45,11 @@ const AdminSubmit = () => {
           }
         }
       );
-
-      window.location.reload();
+      console.log(loginResponse);
+      if (loginResponse.status === 200) {
+        console.log(loginResponse.data);
+        window.location.reload();
+      }
     } catch (err) {
       err.response.data.message && setErr(err.response.data.message);
     }
@@ -52,41 +58,62 @@ const AdminSubmit = () => {
   return (
     <form onSubmit={submit}>
       <Card sx={{ p: 1 }}>
+        {err && <Alert severity="error">{err}</Alert>}
         <CardHeader title="Admin Settings" />
         <Divider />
         <CardContent>
           <TextField
             fullWidth
-            label="AdminSubmit Name"
+            label="First Name"
             margin="normal"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setFirstName(e.target.value)}
             type="text"
-            value={name}
+            value={firstName}
             variant="outlined"
           />
           <TextField
             fullWidth
-            label="Count"
+            label="Last Name"
             margin="normal"
             onChange={(e) => {
-              console.log(e.target.value);
-              setCount(e.target.value);
+              setLastName(e.target.value);
             }}
-            type="number"
-            value={count}
+            type="text"
+            value={lastName}
             variant="outlined"
           />
 
           <TextField
             fullWidth
-            label="Maximum Number"
+            label="Email"
             margin="normal"
             onChange={(e) => {
-              console.log(e.target.value);
-              setLimit(e.target.value);
+              setEmail(e.target.value);
+            }}
+            type="email"
+            value={email}
+            variant="outlined"
+          />
+          <TextField
+            fullWidth
+            label="EPF Number"
+            margin="normal"
+            onChange={(e) => {
+              setEPF(e.target.value);
             }}
             type="number"
-            value={limit}
+            value={epf}
+            variant="outlined"
+          />
+          <TextField
+            fullWidth
+            label="Phone Number"
+            margin="normal"
+            onChange={(e) => {
+              setPhone(e.target.value);
+            }}
+            type="number"
+            value={phoneNo}
             variant="outlined"
           />
         </CardContent>

@@ -7,9 +7,7 @@ const Admin = () => (
     <Box>
       <Location />
     </Box>
-    <Box>
-      <CustomerListResults />
-    </Box>
+    <Box>{/* <CustomerListResults /> */}</Box>
   </Card>
 );
 

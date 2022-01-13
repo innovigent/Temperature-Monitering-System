@@ -34,42 +34,25 @@ const AdminList = ({ customers, ...rest }) => {
   const [page, setPage] = useState(0);
 
   const [listData, setListData] = useState([]);
-  const [text, setText] = useState('');
 
   const [loading, setLoading] = useState(true);
 
-  const renderOrderHead = (item, index) => <th key={index}>{item}</th>;
-  const renderOrderBody = (item, index) => (
-    <tr key={index}>
-      {console.log(item)}
-      <td>{item.id}</td>
-      <td>{item.name}</td>
-      <td>{item.limit}</td>
-      <td>{item.count}</td>
-      <td>
-        <button className="usertblbutton">Delete</button>
-      </td>
-    </tr>
-  );
-
   useEffect(() => {
-    // const fetchData = async () => {};
     const fetchData = async () => {
       setLoading(true);
 
-      const result = await axios(
-        `https://project-tnt-api.herokuapp.com/api/v1/organizations/${localStorage.getItem(
+      const result = await axios.get(
+        `https://project-tnt-api.herokuapp.com/api/v1/users/${localStorage.getItem(
           'organization'
-        )}/locationList`,
+        )}/allAdminInfo`,
         headers
       );
       console.log(result.data.data);
-      setListData(result.data.data.locationsInfo);
+      setListData(result.data?.data?.organizationUsers);
       setLoading(false);
     };
 
     fetchData();
-    // fetchData1();
   }, []);
 
   const handleSelectAll = (event) => {
@@ -92,7 +75,7 @@ const AdminList = ({ customers, ...rest }) => {
       newSelectedCustomerIds = newSelectedCustomerIds.concat(listData, id);
     } else if (selectedIndex === 0) {
       newSelectedCustomerIds = newSelectedCustomerIds.concat(listData.slice(1));
-    } else if (selectedIndex === selectedCustomerIds.length - 1) {
+    } else if (selectedIndex === selectedCustomerIds?.length - 1) {
       newSelectedCustomerIds = newSelectedCustomerIds.concat(
         listData.slice(0, -1)
       );
@@ -125,8 +108,8 @@ const AdminList = ({ customers, ...rest }) => {
                   <Checkbox
                     /* checked={listData.length === listData.length}*/
                     color="primary"
-                    indeterminate={listData.length > 0}
-                    onChange={handleSelectAll}
+                    // indeterminate={listData.length > 0}
+                    // onChange={handleSelectAll}
                   />
                 </TableCell>
                 <TableCell>ID</TableCell>
@@ -136,7 +119,7 @@ const AdminList = ({ customers, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {listData.slice(0, limit).map((customer) => (
+              {listData?.slice(0, limit).map((customer) => (
                 <TableRow
                   hover
                   key={listData.id}
