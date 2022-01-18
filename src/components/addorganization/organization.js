@@ -7,8 +7,10 @@ import {
   CardHeader,
   Divider,
   Grid,
-  TextField
+  TextField,
+  Alert
 } from '@material-ui/core';
+import axios from 'axios';
 
 const Companydetails = (props) => {
   const [companyname, setcompanyName] = useState();
@@ -17,16 +19,46 @@ const Companydetails = (props) => {
   const [phone, setphone] = useState();
   const [address, setaddress] = useState();
   const [regno, setreg] = useState();
+  const [err, setErr] = useState('');
 
-  // const handleChange = (event) => {
-  //   setValues({
-  //     ...values,
-  //     [event.target.name]: event.target.value
-  //   });
-  // };
+  const token = localStorage.getItem('Token');
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    console.log(companyname, ceoname, email, phone, address, regno);
+    setErr('');
+    try {
+      const body = {
+        name: companyname,
+        companyWebsite: ceoname,
+        companyEmail: email,
+        telephoneNo: phone,
+        address01: address,
+        regNo: regno
+      };
+
+      const loginResponse = await axios.post(
+        'https://project-tnt-api.herokuapp.com/api/v1/organizations/',
+        body,
+        {
+          headers: {
+            Accept: 'multipart/form-data',
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      if (loginResponse.status === 200) {
+        window.location.reload();
+      }
+    } catch (err) {
+      err.response.data.message && setErr(err.response.data.message);
+    }
+  };
 
   return (
     <form autoComplete="off" noValidate {...props}>
+      {err && <Alert severity="error">{err}</Alert>}
       <Card sx={{ mb: 4 }}>
         <CardHeader subheader="Add Company" title="Companies" />
         <Divider />
@@ -59,6 +91,7 @@ const Companydetails = (props) => {
                 fullWidth
                 label="Email Address"
                 name="email"
+                type="email"
                 onChange={(e) => setemail(e.target.value)}
                 required
                 value={email}
@@ -74,6 +107,7 @@ const Companydetails = (props) => {
                 type="number"
                 value={phone}
                 variant="outlined"
+                required
               />
             </Grid>
             <Grid item md={6} xs={12}>
@@ -108,7 +142,12 @@ const Companydetails = (props) => {
             p: 2
           }}
         >
-          <Button color="primary" variant="contained">
+          <Button
+            color="primary"
+            variant="contained"
+            type="submit"
+            onClick={onSubmit}
+          >
             Save details
           </Button>
         </Box>
