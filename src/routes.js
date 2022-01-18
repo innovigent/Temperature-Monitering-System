@@ -31,7 +31,6 @@ const routes = [
       { path: 'flagged/employees', element: <MovementFlaged /> },
       { path: 'Adduserfil', element: <Adduserfil /> },
       { path: 'settings', element: <Settings /> },
-      { path: 'Addcompanypage', element: <Addcompanypage /> },
       { path: 'MovementFlaged', element: <MovementFlaged /> },
       { path: 'Deviceapp', element: <Deviceapp /> },
       { path: 'locations', element: <Location /> },
@@ -42,13 +41,9 @@ const routes = [
     path: 'innovigent',
     element: <InnovigentLayout />,
     children: [
-      { path: 'account', element: <Account /> },
-      { path: 'employees', element: <CustomerList /> },
       { path: 'dashboard', element: <InnovigentDashboard /> },
+      { path: 'companies', element: <Addcompanypage /> },
       { path: 'register', element: <Register /> },
-      { path: 'tapped/employees', element: <ProductList /> },
-      { path: 'flagged/employees', element: <MovementFlaged /> },
-      { path: 'Adduserfil', element: <Adduserfil /> },
       { path: 'settings', element: <Settings /> },
       { path: 'Addcompanypage', element: <Addcompanypage /> },
       { path: 'MovementFlaged', element: <MovementFlaged /> },
@@ -64,7 +59,6 @@ const routes = [
       { path: '', element: <Login /> },
       { path: 'forgot', element: <Forgetpassword /> },
       { path: '404', element: <NotFound /> },
-      { path: '/dashboard', element: <Navigate to="/app/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   }
