@@ -1,7 +1,5 @@
 import { Helmet } from 'react-helmet';
-import { Box, Container, Grid } from '@material-ui/core';
-import AccountProfile from '../components/account/AccountProfile';
-import AccountProfileDetails from '../components/account/AccountProfileDetails';
+import { Box, Container } from '@material-ui/core';
 import Companydetails from '../components/addorganization/organization';
 import CustomerListResults from '../components/customer/Organizations';
 
