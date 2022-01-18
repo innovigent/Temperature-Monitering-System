@@ -9,11 +9,8 @@ import {
   TextField
 } from '@material-ui/core';
 import axios from 'axios';
-import { HashLoader } from 'react-spinners';
-import txt from 'src/token.txt';
 
 const token = localStorage.getItem('Token');
-console.log(token);
 const headers = {
   headers: {
     Authorization: `Bearer ${token}`
