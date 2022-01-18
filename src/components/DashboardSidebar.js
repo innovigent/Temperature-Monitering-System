@@ -6,6 +6,7 @@ import SettingsInputComponentOutlinedIcon from '@mui/icons-material/SettingsInpu
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
 import {
   Avatar,
   Box,
@@ -24,7 +25,9 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
     name: localStorage.getItem('name')
   };
 
-  const items = [
+  let items;
+
+  const adminItems = [
     {
       href: '/app/dashboard',
       icon: GridViewOutlinedIcon,
@@ -51,6 +54,41 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
       title: 'Logout'
     }
   ];
+
+  const InnovigentItems = [
+    {
+      href: '/innovigent/dashboard',
+      icon: GridViewOutlinedIcon,
+      title: 'Dashboard'
+    },
+    {
+      href: '/innovigent/companies',
+      icon: LocationCityIcon,
+      title: 'Companies'
+    },
+    {
+      href: '/app/locations',
+      icon: FmdGoodOutlinedIcon,
+      title: 'Locations'
+    },
+    {
+      href: '/app/settings',
+      icon: SettingsInputComponentOutlinedIcon,
+      title: 'Settings'
+    },
+    {
+      href: '',
+      icon: ExitToAppOutlinedIcon,
+      title: 'Logout'
+    }
+  ];
+
+  localStorage.getItem('permission') === '101'
+    ? (items = InnovigentItems)
+    : (items = adminItems);
+
+  console.log(items);
+
   const location = useLocation();
 
   useEffect(() => {

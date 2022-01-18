@@ -3,6 +3,7 @@ import { Box, Container, Grid } from '@material-ui/core';
 
 import SettingsPassword from '../components/settings/SettingsPassword';
 import LocationSettings from 'src/components/settings/LocationSettings';
+import Admin from 'src/pages/Admin';
 
 const SettingsView = () => (
   <>
@@ -22,6 +23,9 @@ const SettingsView = () => (
           </Box>
           <Box sx={{ pt: 3 }}>
             <LocationSettings />
+          </Box>
+          <Box sx={{ py: 3 }}>
+            <Admin />
           </Box>
         </Grid>
       </Container>
