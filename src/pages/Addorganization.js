@@ -8,7 +8,7 @@ import CustomerListResults from '../components/customer/Organizations';
 const Addcompanypage = () => (
   <>
     <Helmet>
-      <title>Account | Material Kit</title>
+      <title>Companies</title>
     </Helmet>
     <Box
       sx={{
