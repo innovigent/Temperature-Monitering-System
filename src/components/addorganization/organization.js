@@ -10,8 +10,6 @@ import {
   TextField
 } from '@material-ui/core';
 
-
-
 const Companydetails = (props) => {
   const [companyname, setcompanyName] = useState();
   const [ceoname, setceoName] = useState();
@@ -28,31 +26,16 @@ const Companydetails = (props) => {
   // };
 
   return (
-    <form
-      autoComplete="off"
-      noValidate
-      {...props}
-    >
-      <Card>
-        <CardHeader
-          subheader="The information can be entered"
-          title="Add Company"
-        />
+    <form autoComplete="off" noValidate {...props}>
+      <Card sx={{ mb: 4 }}>
+        <CardHeader subheader="Add Company" title="Companies" />
         <Divider />
         <CardContent>
-          <Grid
-            container
-            spacing={3}
-          >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+          <Grid container spacing={3}>
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
-                helperText="Please specify the first name"
-                label="Company name"
+                label="Company Name"
                 name="companyname"
                 onChange={(e) => setcompanyName(e.target.value)}
                 required
@@ -60,14 +43,10 @@ const Companydetails = (props) => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
-                label="Ceo name"
+                label="Company Website"
                 name="ceoname"
                 onChange={(e) => setceoName(e.target.value)}
                 required
@@ -75,11 +54,7 @@ const Companydetails = (props) => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Email Address"
@@ -90,11 +65,7 @@ const Companydetails = (props) => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Phone Number"
@@ -105,11 +76,7 @@ const Companydetails = (props) => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Address"
@@ -120,21 +87,16 @@ const Companydetails = (props) => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-                  <TextField
+            <Grid item md={6} xs={12}>
+              <TextField
                 fullWidth
-                label="Reg NO."
+                label="Registration Number"
                 name="regno"
                 onChange={(e) => setreg(e.target.value)}
                 required
                 value={regno}
                 variant="outlined"
               />
-        
             </Grid>
           </Grid>
         </CardContent>
@@ -146,10 +108,7 @@ const Companydetails = (props) => {
             p: 2
           }}
         >
-          <Button
-            color="primary"
-            variant="contained"
-          >
+          <Button color="primary" variant="contained">
             Save details
           </Button>
         </Box>
