@@ -17,6 +17,7 @@ import Deviceapp from './pages/Device';
 import Addcompanypage from './pages/Addorganization';
 import Forgetpassword from './components/Forgetpassword/ForgetPassword';
 import MovementFlaged from './pages/MovementFlaged';
+import Feedback from './pages/Feedback';
 
 const routes = [
   {
@@ -43,12 +44,7 @@ const routes = [
     children: [
       { path: 'dashboard', element: <InnovigentDashboard /> },
       { path: 'companies', element: <Addcompanypage /> },
-      { path: 'register', element: <Register /> },
-      { path: 'settings', element: <Settings /> },
-      { path: 'Addcompanypage', element: <Addcompanypage /> },
-      { path: 'MovementFlaged', element: <MovementFlaged /> },
-      { path: 'Deviceapp', element: <Deviceapp /> },
-      { path: 'locations', element: <Location /> },
+      { path: 'feedbacks', element: <Feedback /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },

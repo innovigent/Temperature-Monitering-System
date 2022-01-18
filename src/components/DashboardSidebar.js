@@ -7,6 +7,7 @@ import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
+import FeedbackIcon from '@mui/icons-material/Feedback';
 import {
   Avatar,
   Box,
@@ -67,14 +68,9 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
       title: 'Companies'
     },
     {
-      href: '/app/locations',
-      icon: FmdGoodOutlinedIcon,
-      title: 'Locations'
-    },
-    {
-      href: '/app/settings',
-      icon: SettingsInputComponentOutlinedIcon,
-      title: 'Settings'
+      href: '/innovigent/feedbacks',
+      icon: FeedbackIcon,
+      title: 'Feedbacks'
     },
     {
       href: '',
