@@ -7,7 +7,7 @@ import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
-import FeedbackIcon from '@mui/icons-material/Feedback';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import {
   Avatar,
   Box,
@@ -50,6 +50,11 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
       title: 'Settings'
     },
     {
+      href: '/app/feedbacks',
+      icon: ChatBubbleOutlineIcon,
+      title: 'Feedbacks'
+    },
+    {
       href: '',
       icon: ExitToAppOutlinedIcon,
       title: 'Logout'
@@ -69,7 +74,7 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
     },
     {
       href: '/innovigent/feedbacks',
-      icon: FeedbackIcon,
+      icon: ChatBubbleOutlineIcon,
       title: 'Feedbacks'
     },
     {
