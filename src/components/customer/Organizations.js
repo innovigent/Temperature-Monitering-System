@@ -39,12 +39,14 @@ const CustomerListResults = ({ customers, ...rest }) => {
       setLoading(true);
 
       const result = await axios(
-        `https://project-tnt-api.herokuapp.com/api/v1/organizations/1/summary`,
+        `https://project-tnt-api.herokuapp.com/api/v1/organizations/${localStorage.getItem(
+          'organization'
+        )}/retrieveRegisteredOrg`,
         headers
       );
       console.log(result);
 
-      setListData([result.data.data.organization]);
+      setListData(result.data.data.organization);
       setLoading(false);
     };
 
@@ -113,10 +115,10 @@ const CustomerListResults = ({ customers, ...rest }) => {
                 </TableCell>
                 <TableCell>ID</TableCell>
                 <TableCell>Company Name</TableCell>
-                <TableCell>Total Employee</TableCell>
-
-                <TableCell>Current Employee</TableCell>
-                <TableCell>Flagged Employee</TableCell>
+                <TableCell>Company Email</TableCell>
+                <TableCell>Company Website</TableCell>
+                <TableCell>Registration Number</TableCell>
+                <TableCell>Telephone Number</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -145,13 +147,11 @@ const CustomerListResults = ({ customers, ...rest }) => {
                       </Typography>
                     </Box>
                   </TableCell>
-                  <TableCell>
-                    {customer.name}
-                    {console.log(customers)}
-                  </TableCell>
-                  <TableCell>{customer.totalEmployees}</TableCell>
-                  <TableCell>{customer.currentEmployees}</TableCell>
-                  <TableCell>{customer.flaggedEmployees}</TableCell>
+                  <TableCell>{customer.name}</TableCell>
+                  <TableCell>{customer.companyEmail}</TableCell>
+                  <TableCell>{customer.companyWebsite}</TableCell>
+                  <TableCell>{customer.regNo}</TableCell>
+                  <TableCell>{customer.telephoneNo}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
