@@ -33,7 +33,7 @@ const FeedbackSubmit = () => {
         const res = await axios.get(
           'https://project-tnt-api.herokuapp.com/api/v1/feedbacks/' +
             localStorage.getItem('organization') +
-            '/myfeedback',
+            '/ListAll',
           headers
         );
 
