@@ -7,7 +7,8 @@ import {
   CardHeader,
   Divider,
   TextField,
-  Container
+  Container,
+  Alert
 } from '@material-ui/core';
 import axios from 'axios';
 import FeedbackList from '../components/feedback/FeedbackList';
@@ -22,7 +23,7 @@ const headers = {
 const FeedbackSubmit = () => {
   const [subject, setSubject] = useState('');
   const [phone, setPhone] = useState('');
-  const [desc, setDesc] = useState('');
+  const [description, setDesc] = useState('');
   const [err, setErr] = useState('');
   const [employees, setEmployees] = useState([]);
 
@@ -30,9 +31,9 @@ const FeedbackSubmit = () => {
     const getEmps = async () => {
       try {
         const res = await axios.get(
-          'https://project-tnt-api.herokuapp.com/api/v1/employees/' +
+          'https://project-tnt-api.herokuapp.com/api/v1/feedbacks/' +
             localStorage.getItem('organization') +
-            '/getall',
+            '/myfeedback',
           headers
         );
 
@@ -50,12 +51,12 @@ const FeedbackSubmit = () => {
     e.preventDefault();
     setErr('');
     try {
-      console.log(subject, phone, desc);
-      const body = { subject, phone, desc };
+      console.log(subject, phone, description);
+      const body = { subject, phone, description };
       const loginResponse = await axios.post(
-        'https://project-tnt-api.herokuapp.com/api/v1/organizations/' +
+        'https://project-tnt-api.herokuapp.com/api/v1/feedback/' +
           localStorage.getItem('organization') +
-          '/locations',
+          '/create',
         body,
         {
           headers: {
@@ -65,7 +66,9 @@ const FeedbackSubmit = () => {
         }
       );
 
-      window.location.reload();
+      if (loginResponse.status === 201) {
+        window.location.reload();
+      }
     } catch (err) {
       err.response.data.message && setErr(err.response.data.message);
     }
@@ -76,6 +79,7 @@ const FeedbackSubmit = () => {
       <Box>
         <>
           <form onSubmit={submit}>
+            {err && <Alert severity="error">{err}</Alert>}
             <Card>
               <CardHeader subheader="Submit Feedback" title="Feedbacks" />
               <Divider />
@@ -108,7 +112,7 @@ const FeedbackSubmit = () => {
                     setDesc(e.target.value);
                   }}
                   type="text"
-                  value={desc}
+                  value={description}
                   variant="outlined"
                 />
               </CardContent>
