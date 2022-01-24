@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Button,
@@ -10,21 +10,48 @@ import {
   Container
 } from '@material-ui/core';
 import axios from 'axios';
+import FeedbackList from '../components/feedback/FeedbackList';
 
 const token = localStorage.getItem('Token');
+const headers = {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+};
 
 const FeedbackSubmit = () => {
   const [subject, setSubject] = useState('');
-  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [desc, setDesc] = useState('');
   const [err, setErr] = useState('');
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(() => {
+    const getEmps = async () => {
+      try {
+        const res = await axios.get(
+          'https://project-tnt-api.herokuapp.com/api/v1/employees/' +
+            localStorage.getItem('organization') +
+            '/getall',
+          headers
+        );
+
+        if (res.status === 200) {
+          setEmployees(res.data.data.employees);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getEmps();
+  }, []);
 
   const submit = async (e) => {
     e.preventDefault();
     setErr('');
     try {
-      console.log(subject, email, desc);
-      const body = { subject, email, desc };
+      console.log(subject, phone, desc);
+      const body = { subject, phone, desc };
       const loginResponse = await axios.post(
         'https://project-tnt-api.herokuapp.com/api/v1/organizations/' +
           localStorage.getItem('organization') +
@@ -55,11 +82,11 @@ const FeedbackSubmit = () => {
               <CardContent>
                 <TextField
                   fullWidth
-                  label="Your Email"
+                  label="Contact Number"
                   margin="normal"
-                  onChange={(e) => setEmail(e.target.value)}
-                  type="email"
-                  value={email}
+                  onChange={(e) => setPhone(e.target.value)}
+                  type="number"
+                  value={phone}
                   variant="outlined"
                 />
                 <TextField
@@ -72,6 +99,8 @@ const FeedbackSubmit = () => {
                   variant="outlined"
                 />
                 <TextField
+                  rows={5}
+                  multiline
                   fullWidth
                   label="Description"
                   margin="normal"
@@ -98,6 +127,9 @@ const FeedbackSubmit = () => {
             </Card>
           </form>
         </>
+      </Box>
+      <Box sx={{ py: 3 }}>
+        <FeedbackList employees={employees} />
       </Box>
     </Container>
   );
