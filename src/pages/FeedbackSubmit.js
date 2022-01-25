@@ -33,12 +33,12 @@ const FeedbackSubmit = () => {
         const res = await axios.get(
           'https://project-tnt-api.herokuapp.com/api/v1/feedbacks/' +
             localStorage.getItem('organization') +
-            '/ListAll',
+            '/myfeedback',
           headers
         );
 
         if (res.status === 200) {
-          setEmployees(res.data.data.employees);
+          setEmployees(res.data.data.companyReporting);
         }
       } catch (error) {
         console.log(error);
@@ -58,15 +58,10 @@ const FeedbackSubmit = () => {
           localStorage.getItem('organization') +
           '/create',
         body,
-        {
-          headers: {
-            Accept: 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-          }
-        }
+        headers
       );
 
-      if (loginResponse.status === 201) {
+      if (loginResponse.status === 200) {
         window.location.reload();
       }
     } catch (err) {
