@@ -18,14 +18,14 @@ const Feedback = () => {
     const getEmps = async () => {
       try {
         const res = await axios.get(
-          'https://project-tnt-api.herokuapp.com/api/v1/employees/' +
+          'https://project-tnt-api.herokuapp.com/api/v1/feedbacks/' +
             localStorage.getItem('organization') +
-            '/getall',
+            '/ListAll',
           headers
         );
 
         if (res.status === 200) {
-          setEmployees(res.data.data.employees);
+          setEmployees(res.data.data.allreports);
         }
       } catch (error) {
         console.log(error);
