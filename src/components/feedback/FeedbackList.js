@@ -12,10 +12,12 @@ import {
   TableBody,
   TableCell,
   TableHead,
+  Button,
   TablePagination,
   TableRow,
   Typography
 } from '@material-ui/core';
+import FeedbackModal from '../model/FeedbackModal';
 
 const FeedbackList = ({ employees, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -94,6 +96,7 @@ const FeedbackList = ({ employees, ...rest }) => {
                 <TableCell>Subject</TableCell>
                 <TableCell>Company Email</TableCell>
                 <TableCell>Submitted At</TableCell>
+                <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -130,6 +133,9 @@ const FeedbackList = ({ employees, ...rest }) => {
                   <TableCell>{customer.organization.companyEmail}</TableCell>
                   <TableCell>
                     {moment(customer.createdAt).format('DD/MM/YYYY')}
+                  </TableCell>
+                  <TableCell>
+                    <FeedbackModal feedback={customer} />
                   </TableCell>
                 </TableRow>
               ))}
