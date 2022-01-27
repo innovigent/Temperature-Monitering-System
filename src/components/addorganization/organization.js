@@ -25,7 +25,6 @@ const Companydetails = (props) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(companyname, ceoname, email, phone, address, regno);
     setErr('');
     try {
       const body = {

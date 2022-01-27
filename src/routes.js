@@ -18,6 +18,7 @@ import Addcompanypage from './pages/Addorganization';
 import Forgetpassword from './components/Forgetpassword/ForgetPassword';
 import MovementFlaged from './pages/MovementFlaged';
 import Feedback from './pages/Feedback';
+import FeedbackSubmit from './pages/FeedbackSubmit';
 
 const routes = [
   {
@@ -28,13 +29,13 @@ const routes = [
       { path: 'employees', element: <CustomerList /> },
       { path: 'dashboard', element: <Dashboard /> },
       { path: 'register', element: <Register /> },
+      { path: 'feedbacks', element: <FeedbackSubmit /> },
+      { path: 'locations', element: <Location /> },
+      { path: 'settings', element: <Settings /> },
       { path: 'tapped/employees', element: <ProductList /> },
       { path: 'flagged/employees', element: <MovementFlaged /> },
       { path: 'Adduserfil', element: <Adduserfil /> },
-      { path: 'settings', element: <Settings /> },
-      { path: 'MovementFlaged', element: <MovementFlaged /> },
       { path: 'Deviceapp', element: <Deviceapp /> },
-      { path: 'locations', element: <Location /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },

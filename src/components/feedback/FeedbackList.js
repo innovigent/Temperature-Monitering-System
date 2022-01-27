@@ -89,11 +89,11 @@ const FeedbackList = ({ employees, ...rest }) => {
                     onChange={handleSelectAll}
                   />
                 </TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>RFID</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell>Registration date</TableCell>
+                <TableCell>Organization</TableCell>
+                <TableCell>Phone Number</TableCell>
+                <TableCell>Subject</TableCell>
+                <TableCell>Company Email</TableCell>
+                <TableCell>Submitted At</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -121,13 +121,13 @@ const FeedbackList = ({ employees, ...rest }) => {
                         {getInitials(customer.name)}
                       </Avatar> */}
                       <Typography color="textPrimary" variant="body1">
-                        {customer.firstName + ' ' + customer.lastName}
+                        {customer.organization.name}
                       </Typography>
                     </Box>
                   </TableCell>
-                  <TableCell>{customer.email}</TableCell>
-                  <TableCell>{customer.rfid}</TableCell>
-                  <TableCell>{customer.phone}</TableCell>
+                  <TableCell>{customer.organization.telephoneNo}</TableCell>
+                  <TableCell>{customer.subject}</TableCell>
+                  <TableCell>{customer.organization.companyEmail}</TableCell>
                   <TableCell>
                     {moment(customer.createdAt).format('DD/MM/YYYY')}
                   </TableCell>
