@@ -121,6 +121,15 @@ const FeedbackModal = (props) => {
                 <CardContent>
                   <TextField
                     fullWidth
+                    label="Organization"
+                    margin="normal"
+                    name="newpassword"
+                    type="text"
+                    value={props.feedback.organization.name}
+                    variant="outlined"
+                  />
+                  <TextField
+                    fullWidth
                     label="Subject"
                     margin="normal"
                     name="newpassword"
