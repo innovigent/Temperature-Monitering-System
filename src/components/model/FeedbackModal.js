@@ -22,12 +22,32 @@ const FeedbackModal = (props) => {
   const [err, setErr] = useState('');
   const [success, setSuccess] = useState('');
 
-  console.log(props);
-  const toggleModal = (event) => {
+  const token = localStorage.getItem('Token');
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  const toggleModal = async (event) => {
     setErr('');
     setSuccess('');
     setModal(!modal);
     event.preventDefault();
+
+    try {
+      await axios.post(
+        'https://project-tnt-api.herokuapp.com/api/v1/feedback/' +
+          localStorage.getItem('organization') +
+          '/list/' +
+          props.feedback.id +
+          '/update-status',
+        { statusId: 200 },
+        headers
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (modal) {
