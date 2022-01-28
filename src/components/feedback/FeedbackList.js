@@ -12,7 +12,7 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  Button,
+  Chip,
   TablePagination,
   TableRow,
   Typography
@@ -96,7 +96,11 @@ const FeedbackList = ({ employees, ...rest }) => {
                 <TableCell>Subject</TableCell>
                 <TableCell>Company Email</TableCell>
                 <TableCell>Submitted At</TableCell>
-                <TableCell>Action</TableCell>
+                <TableCell>
+                  {localStorage.getItem('permission') === '101'
+                    ? 'Action'
+                    : 'Status'}
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -134,9 +138,30 @@ const FeedbackList = ({ employees, ...rest }) => {
                   <TableCell>
                     {moment(customer.createdAt).format('DD/MM/YYYY')}
                   </TableCell>
-                  <TableCell>
-                    <FeedbackModal feedback={customer} />
-                  </TableCell>
+                  {localStorage.getItem('permission') === '101' ? (
+                    <TableCell>
+                      <FeedbackModal feedback={customer} />
+                    </TableCell>
+                  ) : (
+                    <TableCell>
+                      <Chip
+                        label={
+                          customer.statusId === 50
+                            ? 'Pending'
+                            : customer.statusId === 200
+                            ? 'In Review'
+                            : 'Other'
+                        }
+                        color={
+                          customer.statusId === 50
+                            ? 'primary'
+                            : customer.statusId === 200
+                            ? 'success'
+                            : 'warning'
+                        }
+                      />
+                    </TableCell>
+                  )}
                 </TableRow>
               ))}
             </TableBody>
